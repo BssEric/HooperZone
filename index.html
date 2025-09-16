@@ -308,9 +308,43 @@
       background: #aaa;
     }
 
-    /* Media Query: telas pequenas */
-    @media (max-width: 667px) {}
- /* Responsividade */
+    /* Todas imagens */
+  .destaque-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 16px;
+    cursor: pointer;
+    width: 100%;
+    height: auto; /* altura relativa */
+    object-fit: cover;
+  }
+
+  /* Imagens laterais responsivas */
+  .destaque-img.small {
+    max-height: 300px;  /* desktop padrão */
+  }
+
+  /* Imagem do meio responsiva */
+  .destaque-img.middle {
+    max-height: 400px;  /* desktop padrão */
+  }
+
+  /* Hover no meio */
+  .destaque-img.middle:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    z-index: 2;
+  }
+
+  /* Efeito de flutuar no meio */
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .flutuar {
+    animation: flutuar 3s ease-in-out infinite;
+  }
+
+  /* Responsividade */
   @media (max-width: 992px) { /* tablets */
     .destaque-img.small { max-height: 250px; }
     .destaque-img.middle { max-height: 320px; }
@@ -325,46 +359,6 @@
     .destaque-img.small,
     .destaque-img.middle { max-height: 180px; }
   }
-
-.destaque-img {
-    border-radius: 16px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: auto;        /* mantém proporção */
-    height: 400px;      /* tamanho padrão desktop */
-    object-fit: cover;
-  }
-
-  .destaque-img.small {
-    height: 300px;
-  }
-
-  .destaque-img.middle {
-    height: 450px;
-  }
-
-  .destaque-img.middle:hover {
-    transform: scale(1.15);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-    z-index: 2;
-  }
-
-  @keyframes flutuar {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .flutuar {
-    animation: flutuar 3s ease-in-out infinite;
-  }
-
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .destaque-img.small { height: 220px; }
-    .destaque-img.middle { height: 300px; }
-  }
-</style>
-
   </style>
 </head>
 
@@ -473,16 +467,22 @@
   <!-- Título -->
   <h1 id="destaque" class="mb-4">Destaque do Mês</h1>
 
-  <!-- Linha de imagens em uma única linha -->
-  <div class="d-flex justify-content-center align-items-center flex-nowrap gap-3 overflow-auto">
+  <!-- Linha de imagens -->
+  <div class="row justify-content-center align-items-center">
     <!-- Imagem esquerda -->
-    <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+    <div class="col-12 col-md-3 mb-3">
+      <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+    </div>
 
     <!-- Imagem do meio (destaque) -->
-    <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
+    <div class="col-12 col-md-4 mb-3">
+      <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
+    </div>
 
     <!-- Imagem direita -->
-    <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+    <div class="col-12 col-md-3 mb-3">
+      <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+    </div>
   </div>
 </section>
   <br>
