@@ -214,65 +214,58 @@
     }
 
     .carrossel-container {
-      position: relative;
-      padding: 0 40px;
-      margin: 40px 0;
-    }
+  position: relative;
+  padding: 0;   /* remove as bordas laterais */
+  margin: 40px 0;
+}
 
-    .carrossel {
-      display: flex;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      padding: 20px 0;
-      scrollbar-width: none;
-      /* Firefox */
-    }
+.carrossel {
+  display: flex;
+  overflow-x: auto;   /* deixa rolar livre */
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  scrollbar-width: none; /* Firefox */
+}
 
-    .carrossel::-webkit-scrollbar {
-      display: none;
-      /* Chrome, Safari, Edge */
-    }
+.carrossel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
 
-    .carrossel.dragging {
-      scroll-behavior: auto;
-      cursor: grabbing;
-    }
+.produto-card {
+  flex: 0 0 auto;
+  width: 320px;   /* aumentei o tamanho do card */
+  margin: 0 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  background: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .produto-card {
-      flex: 0 0 auto;
-      width: 250px;
-      margin: 0 15px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      background: white;
-    }
+.produto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
 
-    .produto-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
+.produto-img {
+  height: 240px;   /* imagem mais alta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
 
-    .produto-img {
-      height: 180px;
-      background-color: #f8f9fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+.produto-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
 
-    .produto-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .produto-card:hover .produto-img img {
-      transform: scale(1.05);
-    }
+.produto-card:hover .produto-img img {
+  transform: scale(1.05);
+}
 
     .btn-navegacao {
       position: absolute;
@@ -461,35 +454,34 @@
   </blockquote>
   <!-- Nike -->
   <br>
-  <div class="container my-5" id="produtosemdestaque">
-    <h2 class="carrossel-titulo">Produtos em Destaque</h2>
+ Perfeito 👍 vou atualizar direto no seu código só a parte necessária para deixar o carrossel full-width, sem bordas laterais e com imagens maiores.
 
-    <div class="carrossel-container">
-      <button class="btn-navegacao btn-prev">
-        <i class="bi bi-chevron-left">
-          <svg width="24" height="24" fill="black" viewBox="0 0 24 24" transform="" id="injected-svg">
-            <!-- Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free -->
-            <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
-          </svg>
-        </i>
-      </button>
+Aqui está o trecho ajustado:
 
-      <div class="carrossel">
-        <!-- Produtos serão gerados via JavaScript -->
-      </div>
+<!-- Carrossel de Produtos -->
+<div class="container-fluid my-5" id="produtosemdestaque">
+  <h2 class="carrossel-titulo">Produtos em Destaque</h2>
 
-      <button class="btn-navegacao btn-next">
-        <i class="bi bi-chevron-right">
-          <svg width="24" height="24" fill="black" viewBox="0 0 24 24" transform="" id="injected-svg">
-            <!-- Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free -->
-            <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
-          </svg>
-        </i>
-      </button>
+  <div class="carrossel-container">
+    <button class="btn-navegacao btn-prev">
+      <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
+      </svg>
+    </button>
+
+    <div class="carrossel">
+      <!-- Produtos via JS -->
     </div>
 
-    <div class="indicadores"></div>
+    <button class="btn-navegacao btn-next">
+      <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
+      </svg>
+    </button>
   </div>
+
+  <div class="indicadores"></div>
+</div>
   <br>
   <section id="destaquedomes" class="container text-center my-5 h-40">
     <!-- Título -->
