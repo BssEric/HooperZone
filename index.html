@@ -433,13 +433,13 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Sobre</a>
+              <a class="nav-link active" aria-current="page" href="#produtosemdestaque">Produtos Em Destaque</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Produtos</a>
+              <a class="nav-link active" aria-current="page" href="#destaquedomes">Destaque do Mês</a>
             </li>
           </ul>
         </div>
@@ -461,7 +461,7 @@
   </blockquote>
   <!-- Nike -->
   <br>
-  <div class="container my-5">
+  <div class="container my-5" id="produtosemdestaque">
     <h2 class="carrossel-titulo">Produtos em Destaque</h2>
 
     <div class="carrossel-container">
@@ -497,19 +497,9 @@
 
     <!-- Linha de imagens -->
     <div class="row justify-content-center align-items-center h-75">
-      <!-- Imagem esquerda -->
-      <div class="col-12 col-md-3 mb-4">
-        <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
-      </div>
-
       <!-- Imagem do meio (destaque) -->
-      <div class="col-12 col-md-4 mb-4">
+      <div class="">
         <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
-      </div>
-
-      <!-- Imagem direita -->
-      <div class="col-12 col-md-3 mb-4">
-        <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
       </div>
     </div>
   </section>
@@ -582,12 +572,12 @@
     document.addEventListener('DOMContentLoaded', function () {
       // Dados dos produtos (simulados)
       const produtos = [
-        { id: 1, sectionId: "NikePrecision6", nome: "Nike Precision 6", preco: "R$ 399,90", imagem: "	https://th.bing.com/th/id/OIP.4n0SBgvmU16O12nzszP9jAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 2, sectionId: "GiannisImortality3", nome: "Giannis Immortality 3", preco: "R$ 349,90", imagem: "	https://th.bing.com/th/id/OIP.WVt4U0nYwNnprB384y3EMAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 3, sectionId: "NikeAirMaxInfuriate", nome: "Nike Fly By Mid 3", preco: "R$ 799,00", imagem: "https://th.bing.com/th/id/OIP.e-RIK8C5yYYm-cnz4WRYDwHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 4, sectionId: "NikePrecision7", nome: "Nike Precision 7", preco: "R$ 299,90", imagem: "	https://th.bing.com/th/id/OIP.NtQznMEuw8aTkAKjoNACBwHaJQ?w=173&h=216&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
-        { id: 5, sectionId: "AdidasHardenStepback3", nome: "Adidas Harden Stepback 3", preco: "R$ 249,90", imagem: "https://th.bing.com/th/id/OIP.EwU07WfLNUIceVvFheNeTQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 6, sectionId: "UASpawn3", nome: "UA Spawn 3", preco: "R$ 459,90", imagem: "https://th.bing.com/th/id/OIP.gwxEK1H0DPSFw5X0NKXNMAHaH3?w=196&h=207&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 1, sectionId: "NikePrecision6", nome: "Nike Precision 6", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.4n0SBgvmU16O12nzszP9jAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 2, sectionId: "GiannisImortality3", nome: "Giannis Immortality 3", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.WVt4U0nYwNnprB384y3EMAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 3, sectionId: "NikeFlyByMid3", nome: "Nike Fly By Mid 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.e-RIK8C5yYYm-cnz4WRYDwHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 4, sectionId: "NikePrecision7", nome: "Nike Precision 7", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.NtQznMEuw8aTkAKjoNACBwHaJQ?w=173&h=216&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 5, sectionId: "AdidasHardenStepback3", nome: "Adidas Harden Stepback 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.EwU07WfLNUIceVvFheNeTQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 6, sectionId: "UASpawn3", nome: "UA Spawn 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.gwxEK1H0DPSFw5X0NKXNMAHaH3?w=196&h=207&c=7&r=0&o=5&dpr=2&pid=1.7" },
       ];
 
       // Mapeamento dos itens de busca para os IDs das seções
