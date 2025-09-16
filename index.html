@@ -390,18 +390,17 @@ border-radius:30px;
     }
 
     /* Todas imagens */
-  .destaque-img {
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    width: 100%;
-    height: auto; /* altura relativa */
-    object-fit: cover;
-  }
+  .destaque-img.small {
+  height: 450px;   /* agora força a altura */
+  width: 100%;     
+  object-fit: cover;
+}
 
-  /* Imagens laterais responsivas */
-  .destaque-img.middle {
-    max-height: 300px;  /* desktop padrão */
-  }
+.destaque-img.middle {
+  height: 600px;   /* destaque principal */
+  width: 100%;
+  object-fit: cover;
+}
 
   /* Imagem do meio responsiva */
   .destaque-img.large {
