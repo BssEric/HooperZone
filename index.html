@@ -375,6 +375,22 @@
 
     /* Media Query: telas pequenas */
     @media (max-width: 667px) {}
+ /* Responsividade */
+  @media (max-width: 992px) { /* tablets */
+    .destaque-img.small { max-height: 250px; }
+    .destaque-img.middle { max-height: 320px; }
+  }
+
+  @media (max-width: 768px) { /* celulares */
+    .destaque-img.small,
+    .destaque-img.middle { max-height: 220px; }
+  }
+
+  @media (max-width: 480px) { /* celulares pequenos */
+    .destaque-img.small,
+    .destaque-img.middle { max-height: 180px; }
+  }
+
   </style>
 </head>
 
@@ -479,20 +495,23 @@
   <div class="indicadores"></div>
 </div>
   <br>
- <section id="destaquedomes" class="container text-center my-3 h-75">
+<section id="destaquedomes" class="container text-center my-3">
   <!-- Título -->
   <h1 id="destaque" class="mb-4">Destaque do Mês</h1>
 
   <!-- Linha de imagens -->
-  <div class="row justify-content-center align-items-center h-100">
+  <div class="row justify-content-center align-items-center">
+    <!-- Imagem esquerda -->
     <div class="col-12 col-md-3 mb-3">
       <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
     </div>
 
+    <!-- Imagem do meio (destaque) -->
     <div class="col-12 col-md-4 mb-3">
       <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
     </div>
 
+    <!-- Imagem direita -->
     <div class="col-12 col-md-3 mb-3">
       <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
     </div>
