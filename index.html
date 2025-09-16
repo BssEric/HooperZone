@@ -17,15 +17,17 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      /* altura total da tela */
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       text-align: center;
       color: white;
+      padding: 0 20px;
+      /* garante espaçamento lateral em mobile */
     }
 
-    /* Vídeo de fundo */
     .hero video {
       position: absolute;
       top: 0;
@@ -36,7 +38,6 @@
       z-index: -2;
     }
 
-    /* Overlay para contraste */
     .hero::before {
       content: "";
       position: absolute;
@@ -46,6 +47,38 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       z-index: -1;
+    }
+
+    /* Texto dentro da hero (se você tiver) */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Media Queries para telas menores */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 70vh;
+        /* diminui altura em mobile */
+      }
+
+      .hero-content {
+        font-size: 1rem;
+        /* ajusta tamanho do texto */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        min-height: 60vh;
+      }
+
+      .hero-content {
+        font-size: 0.9rem;
+      }
     }
 
     /* Imagens laterais */
@@ -300,10 +333,13 @@
       border-left: 4px solid blue;
     }
 
-    .botaocomprar{
-      padding: 10px 10px; /* controla altura e largura via espaçamento interno */
-      font-size: 20px;    /* aumenta o texto */
-      border-radius: 12px; /* opcional: deixa mais arredondado */ 
+    .botaocomprar {
+      padding: 10px 10px;
+      /* controla altura e largura via espaçamento interno */
+      font-size: 20px;
+      /* aumenta o texto */
+      border-radius: 12px;
+      /* opcional: deixa mais arredondado */
     }
 
     @keyframes flutuar {
@@ -350,11 +386,11 @@
 </head>
 
 <body>
-  <div id="splash-screen">
+  <!-- <div id="splash-screen">
     <div id="splash-logo">
       <img src="img/imgcentro.png">
     </div>
-  </div>
+  </div> -->
 
   <!-- Navbar -->
   <nav class="navbar bg-transparent position-absolute w-100" id="home">
@@ -413,11 +449,8 @@
 
 
   <!-- Hero Section -->
-  <section class="hero py-5" id="home">
-    <!-- Vídeo de fundo -->
-    <video autoplay muted loop playsinline>
-      <source src="img/Hopper Zone.mp4" type="video/mp4">
-    </video>
+  <section class="hero py-5" id="home"> <!-- Vídeo de fundo --> <video autoplay muted loop playsinline>
+      <source src="img/Hopper Zone.mp4" type="video/mp4"></video> 
   </section>
 
   <br><br>
@@ -546,45 +579,45 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
-       document.addEventListener('DOMContentLoaded', function () {
-    // Dados dos produtos (simulados)
-    const produtos = [
+    document.addEventListener('DOMContentLoaded', function () {
+      // Dados dos produtos (simulados)
+      const produtos = [
         { id: 1, sectionId: "NikePrecision6", nome: "Nike Precision 6", preco: "R$ 399,90", imagem: "	https://th.bing.com/th/id/OIP.4n0SBgvmU16O12nzszP9jAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 2, sectionId: "GiannisImortality3", nome: "Giannis Immortality 3", preco: "R$ 349,90", imagem: "	https://th.bing.com/th/id/OIP.WVt4U0nYwNnprB384y3EMAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 3, sectionId: "NikeAirMaxInfuriate", nome: "Nike Fly By Mid 3", preco: "R$ 799,00", imagem: "https://th.bing.com/th/id/OIP.e-RIK8C5yYYm-cnz4WRYDwHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 4, sectionId: "NikePrecision7", nome: "Nike Precision 7", preco: "R$ 299,90", imagem: "	https://th.bing.com/th/id/OIP.NtQznMEuw8aTkAKjoNACBwHaJQ?w=173&h=216&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
         { id: 5, sectionId: "AdidasHardenStepback3", nome: "Adidas Harden Stepback 3", preco: "R$ 249,90", imagem: "https://th.bing.com/th/id/OIP.EwU07WfLNUIceVvFheNeTQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 6, sectionId: "UASpawn3", nome: "UA Spawn 3", preco: "R$ 459,90", imagem: "https://th.bing.com/th/id/OIP.gwxEK1H0DPSFw5X0NKXNMAHaH3?w=196&h=207&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        ];
+      ];
 
-    // Mapeamento dos itens de busca para os IDs das seções
-    const searchData = [
+      // Mapeamento dos itens de busca para os IDs das seções
+      const searchData = [
         { name: "Nike Precision 6", sectionId: "NikePrecision6" },
         { name: "Giannis Immortality 3", sectionId: "GiannisImortality3" },
         { name: "Nike Fly By Mid 3", sectionId: "NikeFlyByMid3" },
         { name: "Nike Precicion 7", sectionId: "NikePrecision7" },
         { name: "Adidas Harden Stepback 3", sectionId: "AdidasHardenStepback3" },
         { name: "UA Spawn 3", sectionId: "UASpawn3" }
-    ];
+      ];
 
-    const carrossel = document.querySelector('.carrossel');
-    const btnPrev = document.querySelector('.btn-prev');
-    const btnNext = document.querySelector('.btn-next');
-    const indicadoresContainer = document.querySelector('.indicadores');
-    const searchInput = document.getElementById('searchInput');
-    const dropdownResults = document.getElementById('dropdownResults');
+      const carrossel = document.querySelector('.carrossel');
+      const btnPrev = document.querySelector('.btn-prev');
+      const btnNext = document.querySelector('.btn-next');
+      const indicadoresContainer = document.querySelector('.indicadores');
+      const searchInput = document.getElementById('searchInput');
+      const dropdownResults = document.getElementById('dropdownResults');
 
-    let isDragging = false;
-    let startX, startScrollLeft;
-    let timeoutId;
+      let isDragging = false;
+      let startX, startScrollLeft;
+      let timeoutId;
 
-    // Gerar cards de produtos
-    produtos.forEach(produto => {
+      // Gerar cards de produtos
+      produtos.forEach(produto => {
         const card = document.createElement('div');
         card.className = 'produto-card';
         card.setAttribute('data-product-id', produto.id);
         if (produto.sectionId) {
-            card.setAttribute('data-section-id', produto.sectionId);
+          card.setAttribute('data-section-id', produto.sectionId);
         }
         card.innerHTML = `
             <div class="produto-img">
@@ -599,110 +632,110 @@
             </div>
         `;
         carrossel.appendChild(card);
-    });
+      });
 
-    // Clonar os primeiros itens para o final para criar efeito infinito
-    const firstFive = Array.from(carrossel.children).slice(0, 5);
-    firstFive.forEach(item => {
+      // Clonar os primeiros itens para o final para criar efeito infinito
+      const firstFive = Array.from(carrossel.children).slice(0, 5);
+      firstFive.forEach(item => {
         carrossel.appendChild(item.cloneNode(true));
-    });
+      });
 
-    // Criar indicadores
-    const numSlides = Math.min(5, produtos.length);
-    for (let i = 0; i < numSlides; i++) {
+      // Criar indicadores
+      const numSlides = Math.min(5, produtos.length);
+      for (let i = 0; i < numSlides; i++) {
         const indicador = document.createElement('div');
         indicador.classList.add('indicador');
         if (i === 0) indicador.classList.add('ativo');
         indicador.addEventListener('click', () => {
-            scrollParaSlide(i);
+          scrollParaSlide(i);
         });
         indicadoresContainer.appendChild(indicador);
-    }
+      }
 
-    const indicadores = document.querySelectorAll('.indicador');
+      const indicadores = document.querySelectorAll('.indicador');
 
-    // Event listeners para os botões de navegação
-    btnPrev.addEventListener('click', () => {
+      // Event listeners para os botões de navegação
+      btnPrev.addEventListener('click', () => {
         carrossel.scrollLeft -= 270;
         atualizarIndicadorAtivo();
-    });
+      });
 
-    btnNext.addEventListener('click', () => {
+      btnNext.addEventListener('click', () => {
         carrossel.scrollLeft += 270;
         atualizarIndicadorAtivo();
-    });
+      });
 
-    // Função para arrastar com o mouse
-    const dragStart = (e) => {
+      // Função para arrastar com o mouse
+      const dragStart = (e) => {
         isDragging = true;
         carrossel.classList.add('dragging');
         startX = e.pageX || e.touches[0].pageX;
         startScrollLeft = carrossel.scrollLeft;
-    };
+      };
 
-    const dragging = (e) => {
+      const dragging = (e) => {
         if (!isDragging) return;
         const x = e.pageX || e.touches[0].pageX;
         const walk = (x - startX) * 2;
         carrossel.scrollLeft = startScrollLeft - walk;
-    };
+      };
 
-    const dragStop = () => {
+      const dragStop = () => {
         isDragging = false;
         carrossel.classList.remove('dragging');
         atualizarIndicadorAtivo();
-    };
+      };
 
-    carrossel.addEventListener('mousedown', dragStart);
-    carrossel.addEventListener('touchstart', dragStart);
+      carrossel.addEventListener('mousedown', dragStart);
+      carrossel.addEventListener('touchstart', dragStart);
 
-    document.addEventListener('mousemove', dragging);
-    document.addEventListener('touchmove', dragging);
+      document.addEventListener('mousemove', dragging);
+      document.addEventListener('touchmove', dragging);
 
-    document.addEventListener('mouseup', dragStop);
-    document.addEventListener('touchend', dragStop);
+      document.addEventListener('mouseup', dragStop);
+      document.addEventListener('touchend', dragStop);
 
-    function scrollParaSlide(index) {
+      function scrollParaSlide(index) {
         carrossel.scrollLeft = index * 270;
         atualizarIndicadorAtivo();
-    }
+      }
 
-    function atualizarIndicadorAtivo() {
+      function atualizarIndicadorAtivo() {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
-            const scrollPos = carrossel.scrollLeft;
-            const slideWidth = 270;
-            let slideIndex = Math.round(scrollPos / slideWidth);
+          const scrollPos = carrossel.scrollLeft;
+          const slideWidth = 270;
+          let slideIndex = Math.round(scrollPos / slideWidth);
 
-            if (slideIndex >= produtos.length) {
-                slideIndex = 0;
-                carrossel.scrollLeft = 0;
-            }
-
-            indicadores.forEach((indicador, idx) => {
-                if (idx === slideIndex) {
-                    indicador.classList.add('ativo');
-                } else {
-                    indicador.classList.remove('ativo');
-                }
-            });
-        }, 100);
-    }
-
-    carrossel.addEventListener('scroll', () => {
-        if (carrossel.scrollLeft >= (carrossel.scrollWidth - carrossel.offsetWidth - 10)) {
-            carrossel.style.scrollBehavior = 'auto';
+          if (slideIndex >= produtos.length) {
+            slideIndex = 0;
             carrossel.scrollLeft = 0;
-            setTimeout(() => {
-                carrossel.style.scrollBehavior = 'smooth';
-            }, 50);
+          }
+
+          indicadores.forEach((indicador, idx) => {
+            if (idx === slideIndex) {
+              indicador.classList.add('ativo');
+            } else {
+              indicador.classList.remove('ativo');
+            }
+          });
+        }, 100);
+      }
+
+      carrossel.addEventListener('scroll', () => {
+        if (carrossel.scrollLeft >= (carrossel.scrollWidth - carrossel.offsetWidth - 10)) {
+          carrossel.style.scrollBehavior = 'auto';
+          carrossel.scrollLeft = 0;
+          setTimeout(() => {
+            carrossel.style.scrollBehavior = 'smooth';
+          }, 50);
         }
-    });
+      });
 
-    carrossel.style.scrollBehavior = 'smooth';
+      carrossel.style.scrollBehavior = 'smooth';
 
-    // Sugestões iniciais
-    function showInitialSuggestions() {
+      // Sugestões iniciais
+      function showInitialSuggestions() {
         dropdownResults.innerHTML = '';
 
         const header = document.createElement('div');
@@ -711,113 +744,113 @@
         dropdownResults.appendChild(header);
 
         searchData.forEach(item => {
+          const element = document.createElement('div');
+          element.className = 'dropdown-item';
+          element.innerHTML = `<span style="margin-right: 10px;">${item.name.split(' ')[0]}</span>${item.name.split(' ').slice(1).join(' ')}`;
+
+          element.addEventListener('click', function () {
+            searchInput.value = item.name;
+            scrollToProduct(item.sectionId);
+          });
+
+          dropdownResults.appendChild(element);
+        });
+
+        dropdownResults.style.display = 'block';
+      }
+
+      // Resultados filtrados
+      function showResults(searchTerm) {
+        dropdownResults.innerHTML = '';
+
+        if (!searchTerm) {
+          showInitialSuggestions();
+          return;
+        }
+
+        const filtered = searchData.filter(item =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (filtered.length === 0) {
+          const noResults = document.createElement('div');
+          noResults.className = 'dropdown-item';
+          noResults.textContent = '❌ Nenhum tênis encontrado';
+          dropdownResults.appendChild(noResults);
+        } else {
+          filtered.forEach(item => {
             const element = document.createElement('div');
             element.className = 'dropdown-item';
             element.innerHTML = `<span style="margin-right: 10px;">${item.name.split(' ')[0]}</span>${item.name.split(' ').slice(1).join(' ')}`;
 
             element.addEventListener('click', function () {
-                searchInput.value = item.name;
-                scrollToProduct(item.sectionId);
+              searchInput.value = item.name;
+              scrollToProduct(item.sectionId);
             });
 
             dropdownResults.appendChild(element);
-        });
-
-        dropdownResults.style.display = 'block';
-    }
-
-    // Resultados filtrados
-    function showResults(searchTerm) {
-        dropdownResults.innerHTML = '';
-
-        if (!searchTerm) {
-            showInitialSuggestions();
-            return;
-        }
-
-        const filtered = searchData.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-
-        if (filtered.length === 0) {
-            const noResults = document.createElement('div');
-            noResults.className = 'dropdown-item';
-            noResults.textContent = '❌ Nenhum tênis encontrado';
-            dropdownResults.appendChild(noResults);
-        } else {
-            filtered.forEach(item => {
-                const element = document.createElement('div');
-                element.className = 'dropdown-item';
-                element.innerHTML = `<span style="margin-right: 10px;">${item.name.split(' ')[0]}</span>${item.name.split(' ').slice(1).join(' ')}`;
-
-                element.addEventListener('click', function () {
-                    searchInput.value = item.name;
-                    scrollToProduct(item.sectionId);
-                });
-
-                dropdownResults.appendChild(element);
-            });
+          });
         }
 
         dropdownResults.style.display = 'block';
-    }
+      }
 
-    // 👉 Função atualizada
-    function scrollToProduct(sectionId) {
+      // 👉 Função atualizada
+      function scrollToProduct(sectionId) {
         dropdownResults.style.display = 'none';
 
         const cards = document.querySelectorAll('.produto-card');
         let targetIndex = -1;
 
         cards.forEach((card, index) => {
-            if (card.getAttribute('data-section-id') === sectionId && index < produtos.length) {
-                targetIndex = index;
-            }
+          if (card.getAttribute('data-section-id') === sectionId && index < produtos.length) {
+            targetIndex = index;
+          }
         });
 
         if (targetIndex !== -1) {
-            scrollParaSlide(targetIndex);
+          scrollParaSlide(targetIndex);
 
-            const targetCard = cards[targetIndex];
+          const targetCard = cards[targetIndex];
 
-            // Faz a página rolar até o card encontrado
-            targetCard.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+          // Faz a página rolar até o card encontrado
+          targetCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
 
-            targetCard.classList.add('highlight');
-            setTimeout(() => {
-                targetCard.classList.remove('highlight');
-            }, 2000);
+          targetCard.classList.add('highlight');
+          setTimeout(() => {
+            targetCard.classList.remove('highlight');
+          }, 2000);
         }
-    }
+      }
 
-    searchInput.addEventListener('input', function () {
+      searchInput.addEventListener('input', function () {
         showResults(this.value);
-    });
+      });
 
-    searchInput.addEventListener('focus', function () {
+      searchInput.addEventListener('focus', function () {
         showInitialSuggestions();
-    });
+      });
 
-    searchInput.addEventListener('keypress', function (e) {
+      searchInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter' && this.value) {
-            const foundItem = searchData.find(item =>
-                item.name.toLowerCase().includes(this.value.toLowerCase())
-            );
-            if (foundItem) {
-                scrollToProduct(foundItem.sectionId);
-            }
+          const foundItem = searchData.find(item =>
+            item.name.toLowerCase().includes(this.value.toLowerCase())
+          );
+          if (foundItem) {
+            scrollToProduct(foundItem.sectionId);
+          }
         }
-    });
+      });
 
-    document.addEventListener('click', function (e) {
+      document.addEventListener('click', function (e) {
         if (e.target !== searchInput && !dropdownResults.contains(e.target)) {
-            dropdownResults.style.display = 'none';
+          dropdownResults.style.display = 'none';
         }
+      });
     });
-});
   </script>
 
   <script>
