@@ -399,17 +399,17 @@ border-radius:30px;
   }
 
   /* Imagens laterais responsivas */
-  .destaque-img.small {
+  .destaque-img.middle {
     max-height: 300px;  /* desktop padrão */
   }
 
   /* Imagem do meio responsiva */
-  .destaque-img.middle {
+  .destaque-img.large {
     max-height: 400px;  /* desktop padrão */
   }
 
   /* Hover no meio */
-  .destaque-img.middle:hover {
+  .destaque-img.large:hover {
     transform: scale(1.12);
     z-index: 2;
   }
@@ -425,18 +425,18 @@ border-radius:30px;
 
   /* Responsividade */
   @media (max-width: 992px) { /* tablets */
-    .destaque-img.small { max-height: 250px; }
-    .destaque-img.middle { max-height: 320px; }
+    .destaque-img.middle { max-height: 250px; }
+    .destaque-img.large { max-height: 320px; }
   }
 
   @media (max-width: 768px) { /* celulares */
-    .destaque-img.small,
-    .destaque-img.middle { max-height: 300px; }
+    .destaque-img.middle,
+    .destaque-img.large { max-height: 300px; }
   }
 
   @media (max-width: 480px) { /* celulares pequenos */
-    .destaque-img.small,
-    .destaque-img.middle { max-height: 300px; }
+    .destaque-img.middle,
+    .destaque-img.large { max-height: 300px; }
   }
   </style>
 </head>
@@ -543,6 +543,7 @@ border-radius:30px;
 </div>
   <br>
 <section id="destaquedomes" class="container text-center my-3">
+<br>
   <!-- Título -->
   <h1 id="destaque" class="mb-4">Destaque do Mês</h1>
 
@@ -550,17 +551,17 @@ border-radius:30px;
   <div class="row justify-content-center align-items-center">
     <!-- Imagem esquerda -->
     <div class="col-12 col-md-3 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+      <img src="img/JA3.png" class="img-fluid destaque-img middle" alt="...">
     </div>
 
     <!-- Imagem do meio (destaque) -->
     <div class="col-12 col-md-4 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
+      <img src="img/JA3.png" class="img-fluid destaque-img large flutuar" alt="...">
     </div>
 
     <!-- Imagem direita -->
     <div class="col-12 col-md-3 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+      <img src="img/JA3.png" class="img-fluid destaque-img middle" alt="...">
     </div>
   </div>
 </section>
