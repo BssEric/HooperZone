@@ -13,19 +13,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
   <style>
-@font-face {
-            font-family: 'Street';
-            src: url('street.woff2') format('woff2');
-        }
-
-        #destaquedomes {
-            font-family: 'Street', 'Arial             Black', sans-serif;
-            font-size: 4rem;
-            color: black;
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-            text-transform: uppercase;
-        }
-
     /* Hero ocupa a tela inteira */
     .hero {
       position: relative;
@@ -71,7 +58,43 @@
       padding: 0 15px;
     }
 
-    
+    /* Media Queries para telas menores */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 70vh;
+        /* diminui altura em mobile */
+      }
+
+      .hero-content {
+        font-size: 1rem;
+        /* ajusta tamanho do texto */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        min-height: 60vh;
+      }
+
+      .hero-content {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Imagens laterais */
+    .hero img {
+      max-width: 300%;
+      height: auto;
+    }
+
+    /* 
+    #imgesquerdo{
+        margin-right: -150px;
+    }
+
+    #imgdireito{
+        margin-left: -225px;
+    } */
 
     /* Navbar transparente flutuando */
     .navbar {
@@ -159,61 +182,149 @@
       background: white;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       margin-bottom: 30px;
-    }
+    }
+
+    #destaquedomes {
+      background-color: #c2bbba4d;
+      padding: 10px;
+      border-radius: 25px;
+    }
+
+    .destaque-img {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .destaque-img.small {
+      height: 390px;
+      /* tamanho grande */
+    }
+
+    .destaque-img.middle {
+      height: 510px;
+      /* destaque principal */
+    }
+
+    .destaque-img.middle:hover {
+      transform: scale(1.15);
+      /* box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4); */
+      z-index: 2;
+    }
 
     .carrossel-container {
-  position: relative;
-  padding: 0;   /* remove as bordas laterais */
-  margin: 40px 0;
-}
+      position: relative;
+      padding: 0;
+      /* remove as bordas laterais */
+      margin: 40px 0;
+    }
 
-.carrossel {
-  display: flex;
-  overflow-x: auto;   /* deixa rolar livre */
-  scroll-behavior: smooth;
-  padding: 20px 0;
-  scrollbar-width: none; /* Firefox */
-}
+    .carrossel {
+      display: flex;
+      overflow-x: auto;
+      /* deixa rolar livre */
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      scrollbar-width: none;
+      /* Firefox */
+    }
 
-.carrossel::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
+    .carrossel::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari, Edge */
+    }
 
-.produto-card {
-  flex: 0 0 auto;
-  width: 320px;   /* aumentei o tamanho do card */
-  margin: 0 10px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  background: white;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+    .produto-card {
+      flex: 0 0 auto;
+      width: 250px;
+      margin: 0 10px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      background: white;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      /* ← NOVO: Transforma o card em flex container */
+      flex-direction: column;
+      /* ← NOVO: Organiza os elementos em coluna */
+    }
 
-.produto-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-}
+    .card-body {
+      padding: 15px;
+      display: flex;
+      /* ← NOVO: Transforma o body em flex container */
+      flex-direction: column;
+      /* ← NOVO: Organiza os elementos em coluna */
+      flex-grow: 1;
+      /* ← NOVO: Faz o body ocupar todo espaço disponível */
+    }
 
-.produto-img {
-  height: 240px;   /* imagem mais alta */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f8f9fa;
-  overflow: hidden;
-}
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+      /* ← NOVO: Impede que o título encolha */
+    }
 
-.produto-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s;
-}
+    .card-text {
+      margin-bottom: 15px;
+      flex-shrink: 0;
+      /* ← NOVO: Impede que o preço encolha */
+    }
 
-.produto-card:hover .produto-img img {
-  transform: scale(1.05);
-}
+    .d-grid {
+      margin-top: auto;
+      /* ← NOVO: Empurra o botão para baixo */
+      flex-shrink: 0;
+      /* ← NOVO: Impede que o botão encolha */
+    }
+
+
+    .produto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .produto-img {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .produto-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .produto-card:hover .produto-img img {
+      transform: scale(1.05);
+    }
+
+    .produto-img {
+      height: 180px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .produto-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .produto-card:hover .produto-img img {
+      transform: scale(1.05);
+    }
 
     .btn-navegacao {
       position: absolute;
@@ -283,74 +394,6 @@
       /* opcional: deixa mais arredondado */
     }
 
-#destaquedomes{
-background-color:#c4c2c2;
-border-radius:30px;
-}
-
-.hero {
-  position: relative;
-  min-height: 100vh; /* altura total da tela */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  text-align: center;
-  color: white;
-  padding: 0 20px; /* garante espaçamento lateral em mobile */
-}
-
-.hero video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
-}
-
-/* Texto dentro da hero (se você tiver) */
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Media Queries para telas menores */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 70vh; /* diminui altura em mobile */
-  }
-
-  .hero-content {
-    font-size: 1rem; /* ajusta tamanho do texto */
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    min-height: 60vh;
-  }
-
-  .hero-content {
-    font-size: 0.9rem;
-  }
-}
-
     @keyframes flutuar {
 
       0%,
@@ -389,64 +432,32 @@ border-radius:30px;
       background: #aaa;
     }
 
-    /* Todas imagens */
-  .destaque-img.small {
-  height: 450px;   /* agora força a altura */
-  width: 100%;     
-  object-fit: cover;
-}
+    /* Estilo para highlight do produto */
+    .produto-card.highlight {
+      animation: highlight 2s ease;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+    }
 
-.destaque-img.middle {
-  height: 600px;   /* destaque principal */
-  width: 100%;
-  object-fit: cover;
-}
+    @keyframes highlight {
+      0% {
+        transform: scale(1);
+      }
 
-  /* Imagem do meio responsiva */
-  .destaque-img.large {
-    max-height: 400px;  /* desktop padrão */
-  }
+      50% {
+        transform: scale(1.05);
+      }
 
-  /* Hover no meio */
-  .destaque-img.large:hover {
-    transform: scale(1.12);
-    z-index: 2;
-  }
+      100% {
+        transform: scale(1);
+      }
+    }
 
-  /* Efeito de flutuar no meio */
-  @keyframes flutuar {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  .flutuar {
-    animation: flutuar 3s ease-in-out infinite;
-  }
-
-  /* Responsividade */
-  @media (max-width: 992px) { /* tablets */
-    .destaque-img.middle { max-height: 250px; }
-    .destaque-img.large { max-height: 320px; }
-  }
-
-  @media (max-width: 768px) { /* celulares */
-    .destaque-img.middle,
-    .destaque-img.large { max-height: 300px; }
-  }
-
-  @media (max-width: 480px) { /* celulares pequenos */
-    .destaque-img.middle,
-    .destaque-img.large { max-height: 300px; }
-  }
+    /* Media Query: telas pequenas */
+    @media (max-width: 667px) {}
   </style>
 </head>
 
 <body>
-  <!-- <div id="splash-screen">
-    <div id="splash-logo">
-      <img src="img/imgcentro.png">
-    </div>
-  </div> -->
-
   <!-- Navbar -->
   <nav class="navbar bg-transparent position-absolute w-100" id="home">
     <div class="container-fluid d-flex align-items-center">
@@ -455,7 +466,6 @@ border-radius:30px;
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <svg width="50" height="50" fill="#ffffff" viewBox="0 0 24 24" transform="" id="injected-svg">
-            <!-- Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free -->
             <path d="M4 5H20V7H4z" />
             <path d="M4 11H20V13H4z" />
             <path d="M4 17H20V19H4z" />
@@ -502,68 +512,86 @@ border-radius:30px;
     </div>
   </nav>
 
-
   <!-- Hero Section -->
-  <section class="hero py-5" id="home"> <!-- Vídeo de fundo --> <video autoplay muted loop playsinline>
-      <source src="img/Hopper Zone.mp4" type="video/mp4"></video> 
+  <section class="hero py-5" id="home">
+    <video autoplay muted loop playsinline>
+      <source src="img/Hopper Zone.mp4" type="video/mp4">
+    </video>
   </section>
 
   <br><br>
-  <!-- <h1 style="font-size: 30px; margin-left: 25px;" id="Basquete"><ins>Coleção de Basquete:</ins></h1> -->
   <blockquote class="blockquote text-center">
     <p class="mb-0" style="display:grid;"></p>Querendo algumas peças pra jogar no <mark>DRIP?</mark> Você ta no lugar
     certo!</p>
   </blockquote>
-  <!-- Nike -->
-  <br>
-<!-- Carrossel de Produtos -->
-<div class="container-fluid my-5" id="produtosemdestaque">
-  <h2 class="carrossel-titulo">Produtos em Destaque</h2>
 
-  <div class="carrossel-container">
-    <button class="btn-navegacao btn-prev">
-      <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
-        <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
-      </svg>
-    </button>
+  <!-- Carrossel de Produtos 1 -->
+  <div class="container-fluid my-5" id="produtosemdestaque">
+    <h2 class="carrossel-titulo">Melhores Tênis Custo-benefício</h2>
 
-    <div class="carrossel">
-      <!-- Produtos via JS -->
+    <div class="carrossel-container carrossel1-container">
+      <button class="btn-navegacao btn-prev carrossel1-prev">
+        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+          <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
+        </svg>
+      </button>
+
+      <div class="carrossel-container" id="carrossel1">
+        <div class="carrossel carrossel1"></div>
+      </div>
+
+      <button class="btn-navegacao btn-next carrossel1-next">
+        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+          <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
+        </svg>
+      </button>
     </div>
 
-    <button class="btn-navegacao btn-next">
-      <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
-        <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
-      </svg>
-    </button>
+    <div class="indicadores indicadores1"></div>
   </div>
-
-  <div class="indicadores"></div>
-</div>
   <br>
-<section id="destaquedomes" class="container text-center my-3">
-<br>
-  <!-- Título -->
-  <h1 id="destaque" class="mb-4">Destaque do Mês</h1>
 
-  <!-- Linha de imagens -->
-  <div class="row justify-content-center align-items-center">
-    <!-- Imagem esquerda -->
-    <div class="col-12 col-md-3 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img middle" alt="...">
+  <!-- Carrossel de Produtos 2 -->
+  <div class="container-fluid my-5" id="produtosemdestaque2">
+    <h2 class="carrossel-titulo">Melhores Camisetas</h2>
+
+    <div class="carrossel-container carrossel2-container">
+      <button class="btn-navegacao btn-prev carrossel2-prev">
+        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+          <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
+        </svg>
+      </button>
+
+      <div class="carrossel-container" id="carrossel2">
+        <div class="carrossel carrossel2"></div>
+      </div>
+
+      <button class="btn-navegacao btn-next carrossel2-next">
+        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+          <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
+        </svg>
+      </button>
     </div>
 
-    <!-- Imagem do meio (destaque) -->
-    <div class="col-12 col-md-4 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img large flutuar" alt="...">
-    </div>
-
-    <!-- Imagem direita -->
-    <div class="col-12 col-md-3 mb-3">
-      <img src="img/JA3.png" class="img-fluid destaque-img middle" alt="...">
-    </div>
+    <div class="indicadores indicadores2"></div>
   </div>
-</section>
+  <br>
+
+  <section id="destaquedomes" class="container text-center my-5 h-40">
+    <h1 id="destaque" style="font-family: Cascadia Code;" class="mb-5">Destaque do Mês</h1>
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-3 mb-3">
+        <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <img src="img/JA3.png" class="img-fluid destaque-img middle flutuar" alt="...">
+      </div>
+      <div class="col-12 col-md-3 mb-3">
+        <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
+      </div>
+    </div>
+  </section>
+
   <br>
   <hr>
   <footer class="footer">
@@ -610,14 +638,16 @@ border-radius:30px;
     <div class="container">
       <div class="row">
         <div class="col-sm">
-          <h1 style="font-size: 20px;">© HooperZone</h1>
-          <p>Powered by <a href="https://github.com/BssEric" target="_blank" rel"noopernoreferrer">BssEric</a></p>
+          <h1 style="font-size: 20px; text-decoration: underline;">© HooperZone</h1>
+          <p>Powered by <a href="https://github.com/BssEric" target="_blank" rel"noopernoreferrer"
+              style="text-decoration: underline;">BssEric</a></p>
         </div>
       </div>
       <br>
       <br>
       <br>
   </footer>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -631,46 +661,63 @@ border-radius:30px;
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Dados dos produtos (simulados)
+      // Dados dos produtos
       const produtos = [
-        { id: 1, sectionId: "NikePrecision6", nome: "Nike Precision 6", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.4n0SBgvmU16O12nzszP9jAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 2, sectionId: "GiannisImortality3", nome: "Giannis Immortality 3", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.WVt4U0nYwNnprB384y3EMAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 1, sectionId: "NikePrecision6", nome: "Nike Precision 6", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.4n0SBgvmU16O12nzszP9jAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 2, sectionId: "GiannisImortality3", nome: "Giannis Immortality 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.WVt4U0nYwNnprB384y3EMAHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 3, sectionId: "NikeFlyByMid3", nome: "Nike Fly By Mid 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.e-RIK8C5yYYm-cnz4WRYDwHaJQ?w=173&h=216&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 4, sectionId: "NikePrecision7", nome: "Nike Precision 7", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.NtQznMEuw8aTkAKjoNACBwHaJQ?w=173&h=216&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 4, sectionId: "NikePrecision7", nome: "Nike Precision 7", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.NtQznMEuw8aTkAKjoNACBwHaJQ?w=173&h=216&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
         { id: 5, sectionId: "AdidasHardenStepback3", nome: "Adidas Harden Stepback 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.EwU07WfLNUIceVvFheNeTQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 6, sectionId: "UASpawn3", nome: "UA Spawn 3", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.gwxEK1H0DPSFw5X0NKXNMAHaH3?w=196&h=207&c=7&r=0&o=5&dpr=2&pid=1.7" },
       ];
 
-      // Mapeamento dos itens de busca para os IDs das seções
+      const produtos2 = [
+        { id: 7, sectionId: "Camiseta Michael Jordan", nome: "Camiseta Michael Jordan", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.e9lCcVcYAVkMJQ8dCQIkAwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 8, sectionId: "CamisetaDennisRodman", nome: "Camiseta Dennis Rodman", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.yVaR7eh-q-Ki8iReV6TIzQHaHY?w=173&h=172&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 9, sectionId: "CamisetaJamesHarden", nome: "Camiseta James Harden", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.ls0Av4u0BJ-WMu8IdksKlQHaJ4?w=173&h=231&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 10, sectionId: "CamsisetaJaMorant", nome: "Camsiseta JaMorant", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.zJhi-3ZWPsnFnhbJdjoyjQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 11, sectionId: "CamsisetaGiannisAntetokounmpo", nome: "Camiseta Giannis Antetokounmpo", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.rRxqGQqwH7E6gOyd17Q5FQHaHa?w=207&h=207&c=7&r=0&o=7&pid=1.7&rm=3" },
+        { id: 12, sectionId: "CamisetaLebronJames", nome: "Camiseta Lebron James", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.Iloeq_eAeDWFNkHlawggmwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+      ];
+
+      // Mapeamento dos itens de busca
       const searchData = [
         { name: "Nike Precision 6", sectionId: "NikePrecision6" },
         { name: "Giannis Immortality 3", sectionId: "GiannisImortality3" },
         { name: "Nike Fly By Mid 3", sectionId: "NikeFlyByMid3" },
-        { name: "Nike Precicion 7", sectionId: "NikePrecision7" },
+        { name: "Nike Precision 7", sectionId: "NikePrecision7" },
         { name: "Adidas Harden Stepback 3", sectionId: "AdidasHardenStepback3" },
-        { name: "UA Spawn 3", sectionId: "UASpawn3" }
+        { name: "UA Spawn 3", sectionId: "UASpawn3" },
+        { name: "Camiseta Michael Jordan", sectionId: "CamisetaMichaelJordan" },
+        { name: "Camiseta Dennis Rodman", sectionId: "CamisetaDennisRodman" },
+        { name: "Camiseta James Harden", sectionId: "CamisetaJamesHarden" },
+        { name: "Camsiseta JaMorant", sectionId: "CamsisetaJaMorant" },
+        { name: "Camiseta Giannis Antetokounmpo", sectionId: "CamsisetaGiannisAntetokounmpo" },
+        { name: "Camiseta Lebron James", sectionId: "CamisetaLebronJames" }
       ];
 
-      const carrossel = document.querySelector('.carrossel');
-      const btnPrev = document.querySelector('.btn-prev');
-      const btnNext = document.querySelector('.btn-next');
-      const indicadoresContainer = document.querySelector('.indicadores');
       const searchInput = document.getElementById('searchInput');
       const dropdownResults = document.getElementById('dropdownResults');
 
-      let isDragging = false;
-      let startX, startScrollLeft;
-      let timeoutId;
+      // Inicializar carrosseis
+      initCarrossel('carrossel1', produtos, 'indicadores1', 'carrossel1-prev', 'carrossel1-next');
+      initCarrossel('carrossel2', produtos2, 'indicadores2', 'carrossel2-prev', 'carrossel2-next');
 
-      // Gerar cards de produtos
-      produtos.forEach(produto => {
-        const card = document.createElement('div');
-        card.className = 'produto-card';
-        card.setAttribute('data-product-id', produto.id);
-        if (produto.sectionId) {
+      function initCarrossel(carrosselId, produtosData, indicadoresId, prevBtnId, nextBtnId) {
+        const carrossel = document.querySelector(`#${carrosselId} .carrossel`);
+        const btnPrev = document.querySelector(`.${prevBtnId}`);
+        const btnNext = document.querySelector(`.${nextBtnId}`);
+        const indicadoresContainer = document.querySelector(`.${indicadoresId}`);
+
+        let timeoutId;
+
+        // Gerar cards de produtos
+        produtosData.forEach(produto => {
+          const card = document.createElement('div');
+          card.className = 'produto-card';
+          card.setAttribute('data-product-id', produto.id);
           card.setAttribute('data-section-id', produto.sectionId);
-        }
-        card.innerHTML = `
+          card.innerHTML = `
             <div class="produto-img">
                 <img src="${produto.imagem}" alt="${produto.nome}">
             </div>
@@ -678,117 +725,134 @@ border-radius:30px;
                 <h5 class="card-title">${produto.nome}</h5>
                 <p class="card-text text-primary fw-bold">${produto.preco}</p>
                 <div class="d-grid">
-                    <button class="btn btn-outline-primary botaocomprar">Ver Cupom</button>
+                    <button class="btn btn-outline-primary fixep-bottom botaocomprar">Ver Cupom</button>
                 </div>
             </div>
-        `;
-        carrossel.appendChild(card);
-      });
-
-      // Clonar os primeiros itens para o final para criar efeito infinito
-      const firstFive = Array.from(carrossel.children).slice(0, 5);
-      firstFive.forEach(item => {
-        carrossel.appendChild(item.cloneNode(true));
-      });
-
-      // Criar indicadores
-      const numSlides = Math.min(5, produtos.length);
-      for (let i = 0; i < numSlides; i++) {
-        const indicador = document.createElement('div');
-        indicador.classList.add('indicador');
-        if (i === 0) indicador.classList.add('ativo');
-        indicador.addEventListener('click', () => {
-          scrollParaSlide(i);
+          `;
+          carrossel.appendChild(card);
         });
-        indicadoresContainer.appendChild(indicador);
-      }
 
-      const indicadores = document.querySelectorAll('.indicador');
+        // Clonar os primeiros itens para o final para criar efeito infinito
+        const firstFive = Array.from(carrossel.children).slice(0, 5);
+        firstFive.forEach(item => {
+          carrossel.appendChild(item.cloneNode(true));
+        });
 
-      // Event listeners para os botões de navegação
-      btnPrev.addEventListener('click', () => {
-        carrossel.scrollLeft -= 270;
-        atualizarIndicadorAtivo();
-      });
+        // Criar indicadores
+        const numSlides = Math.min(5, produtosData.length);
+        for (let i = 0; i < numSlides; i++) {
+          const indicador = document.createElement('div');
+          indicador.classList.add('indicador');
+          if (i === 0) indicador.classList.add('ativo');
+          indicador.addEventListener('click', () => {
+            scrollParaSlide(i, carrossel);
+          });
+          indicadoresContainer.appendChild(indicador);
+        }
 
-      btnNext.addEventListener('click', () => {
-        carrossel.scrollLeft += 270;
-        atualizarIndicadorAtivo();
-      });
+        const indicadores = indicadoresContainer.querySelectorAll('.indicador');
 
-      // Função para arrastar com o mouse
-      const dragStart = (e) => {
-        isDragging = true;
-        carrossel.classList.add('dragging');
-        startX = e.pageX || e.touches[0].pageX;
-        startScrollLeft = carrossel.scrollLeft;
-      };
+        // Event listeners para os botões de navegação
+        btnPrev.addEventListener('click', () => {
+          carrossel.scrollLeft -= 270;
+          atualizarIndicadorAtivo(carrossel, indicadores, produtosData);
+        });
 
-      const dragging = (e) => {
-        if (!isDragging) return;
-        const x = e.pageX || e.touches[0].pageX;
-        const walk = (x - startX) * 2;
-        carrossel.scrollLeft = startScrollLeft - walk;
-      };
+        btnNext.addEventListener('click', () => {
+          carrossel.scrollLeft += 270;
+          atualizarIndicadorAtivo(carrossel, indicadores, produtosData);
+        });
 
-      const dragStop = () => {
-        isDragging = false;
-        carrossel.classList.remove('dragging');
-        atualizarIndicadorAtivo();
-      };
+        function scrollParaSlide(index, carrossel) {
+          carrossel.scrollLeft = index * 270;
+          atualizarIndicadorAtivo(carrossel, indicadores, produtosData);
+        }
 
-      carrossel.addEventListener('mousedown', dragStart);
-      carrossel.addEventListener('touchstart', dragStart);
+        function atualizarIndicadorAtivo(carrossel, indicadores, produtosData) {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            const scrollPos = carrossel.scrollLeft;
+            const slideWidth = 270;
+            let slideIndex = Math.round(scrollPos / slideWidth);
 
-      document.addEventListener('mousemove', dragging);
-      document.addEventListener('touchmove', dragging);
+            if (slideIndex >= produtosData.length) {
+              slideIndex = 0;
+              carrossel.scrollLeft = 0;
+            }
 
-      document.addEventListener('mouseup', dragStop);
-      document.addEventListener('touchend', dragStop);
+            indicadores.forEach((indicador, idx) => {
+              if (idx === slideIndex) {
+                indicador.classList.add('ativo');
+              } else {
+                indicador.classList.remove('ativo');
+              }
+            });
+          }, 100);
+        }
 
-      function scrollParaSlide(index) {
-        carrossel.scrollLeft = index * 270;
-        atualizarIndicadorAtivo();
-      }
-
-      function atualizarIndicadorAtivo() {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          const scrollPos = carrossel.scrollLeft;
-          const slideWidth = 270;
-          let slideIndex = Math.round(scrollPos / slideWidth);
-
-          if (slideIndex >= produtos.length) {
-            slideIndex = 0;
+        carrossel.addEventListener('scroll', () => {
+          if (carrossel.scrollLeft >= (carrossel.scrollWidth - carrossel.offsetWidth - 10)) {
+            carrossel.style.scrollBehavior = 'auto';
             carrossel.scrollLeft = 0;
+            setTimeout(() => {
+              carrossel.style.scrollBehavior = 'smooth';
+            }, 50);
           }
+        });
 
-          indicadores.forEach((indicador, idx) => {
-            if (idx === slideIndex) {
-              indicador.classList.add('ativo');
-            } else {
-              indicador.classList.remove('ativo');
+        carrossel.style.scrollBehavior = 'smooth';
+      }
+
+      // 👉 FUNÇÃO CORRIGIDA PARA SCROLL TO PRODUCT
+      function scrollToProduct(sectionId) {
+        dropdownResults.style.display = 'none';
+
+        // Procurar em ambos os carrosséis
+        const carrosseis = [
+          document.querySelector('#carrossel1 .carrossel'),
+          document.querySelector('#carrossel2 .carrossel')
+        ];
+
+        let targetCard = null;
+        let targetCarrossel = null;
+
+        carrosseis.forEach(carrossel => {
+          const cards = carrossel.querySelectorAll('.produto-card');
+          cards.forEach(card => {
+            if (card.getAttribute('data-section-id') === sectionId) {
+              targetCard = card;
+              targetCarrossel = carrossel;
+              return;
             }
           });
-        }, 100);
-      }
+          if (targetCard) return;
+        });
 
-      carrossel.addEventListener('scroll', () => {
-        if (carrossel.scrollLeft >= (carrossel.scrollWidth - carrossel.offsetWidth - 10)) {
-          carrossel.style.scrollBehavior = 'auto';
-          carrossel.scrollLeft = 0;
+        if (targetCard && targetCarrossel) {
+          // Rolar até a seção do carrossel
+          targetCarrossel.closest('.container-fluid').scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+          // Destacar o card
+          targetCard.classList.add('highlight');
+
+          // Rolar o carrossel até o card
+          const cardIndex = Array.from(targetCarrossel.children).indexOf(targetCard);
+          if (cardIndex !== -1) {
+            targetCarrossel.scrollLeft = cardIndex * 270;
+          }
+
           setTimeout(() => {
-            carrossel.style.scrollBehavior = 'smooth';
-          }, 50);
+            targetCard.classList.remove('highlight');
+          }, 2000);
         }
-      });
-
-      carrossel.style.scrollBehavior = 'smooth';
+      }
 
       // Sugestões iniciais
       function showInitialSuggestions() {
         dropdownResults.innerHTML = '';
-
         const header = document.createElement('div');
         header.className = 'suggestion-header';
         header.textContent = '⛹️ Tênis disponíveis:';
@@ -798,12 +862,10 @@ border-radius:30px;
           const element = document.createElement('div');
           element.className = 'dropdown-item';
           element.innerHTML = `<span style="margin-right: 10px;">${item.name.split(' ')[0]}</span>${item.name.split(' ').slice(1).join(' ')}`;
-
           element.addEventListener('click', function () {
             searchInput.value = item.name;
             scrollToProduct(item.sectionId);
           });
-
           dropdownResults.appendChild(element);
         });
 
@@ -833,12 +895,10 @@ border-radius:30px;
             const element = document.createElement('div');
             element.className = 'dropdown-item';
             element.innerHTML = `<span style="margin-right: 10px;">${item.name.split(' ')[0]}</span>${item.name.split(' ').slice(1).join(' ')}`;
-
             element.addEventListener('click', function () {
               searchInput.value = item.name;
               scrollToProduct(item.sectionId);
             });
-
             dropdownResults.appendChild(element);
           });
         }
@@ -846,37 +906,7 @@ border-radius:30px;
         dropdownResults.style.display = 'block';
       }
 
-      // 👉 Função atualizada
-      function scrollToProduct(sectionId) {
-        dropdownResults.style.display = 'none';
-
-        const cards = document.querySelectorAll('.produto-card');
-        let targetIndex = -1;
-
-        cards.forEach((card, index) => {
-          if (card.getAttribute('data-section-id') === sectionId && index < produtos.length) {
-            targetIndex = index;
-          }
-        });
-
-        if (targetIndex !== -1) {
-          scrollParaSlide(targetIndex);
-
-          const targetCard = cards[targetIndex];
-
-          // Faz a página rolar até o card encontrado
-          targetCard.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-
-          targetCard.classList.add('highlight');
-          setTimeout(() => {
-            targetCard.classList.remove('highlight');
-          }, 2000);
-        }
-      }
-
+      // Event listeners para a busca
       searchInput.addEventListener('input', function () {
         showResults(this.value);
       });
@@ -905,38 +935,20 @@ border-radius:30px;
   </script>
 
   <script>
-    // Função para lidar com o cadastro e simulação de envio do email  
     function cadastrarNewsletter() {
-      // Captura o valor do email inserido  
       var email = document.getElementById("email").value;
-
-      // Validação simples do email (verifica se não está vazio e se tem "@" e ".")  
       if (email === "") {
         alert("Por favor, insira um email.");
         return;
       }
-
       if (!email.includes("@") || !email.includes(".")) {
         alert("Por favor, insira um email válido.");
         return;
       }
-
-      // Simulação de envio de email  
       alert("Obrigado por se inscrever! Você receberá atualizações em: " + email);
-
-      // Limpar o campo de email após inscrição  
       document.getElementById("email").value = "";
     }
-
   </script>
-  <script>
-    // Remover a tela de introdução após alguns segundos  
-    setTimeout(() => {
-      document.getElementById("splash-screen").style.display = "none";
-      document.getElementById("content").style.display = "block";
-    }, 2300); //  segundos  
-  </script>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
