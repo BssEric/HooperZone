@@ -855,7 +855,7 @@
         dropdownResults.innerHTML = '';
         const header = document.createElement('div');
         header.className = 'suggestion-header';
-        header.textContent = '⛹️ Tênis disponíveis:';
+        header.textContent = '⛹️ Produtos disponíveis:';
         dropdownResults.appendChild(header);
 
         searchData.forEach(item => {
@@ -888,7 +888,7 @@
         if (filtered.length === 0) {
           const noResults = document.createElement('div');
           noResults.className = 'dropdown-item';
-          noResults.textContent = '❌ Nenhum tênis encontrado';
+          noResults.textContent = '❌ Nenhum produto encontrado';
           dropdownResults.appendChild(noResults);
         } else {
           filtered.forEach(item => {
