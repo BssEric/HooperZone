@@ -13,11 +13,270 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
   <style>
-    /* Hero ocupa a tela inteira */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --card-bg: #ffffff;
+      --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      --nav-bg: transparent;
+      --footer-bg: #ffff;
+      --footer-text: #000000;
+      --dropdown-bg: rgba(255, 255, 255, 0.95);
+      --dropdown-text: #000000;
+      --hero-overlay: rgba(0, 0, 0, 0.5);
+      --offcanvas-bg: #ffffff;
+      --offcanvas-text: #000000;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #ffffff;
+      --card-bg: #2d2d2d;
+      --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      --nav-bg: rgba(26, 26, 26, 0.9);
+      --footer-bg: #2d2d2d;
+      --footer-text: #ffffff;
+      --dropdown-bg: rgba(45, 45, 45, 0.95);
+      --dropdown-text: #ffffff;
+      --hero-overlay: rgba(0, 0, 0, 0.7);
+      --offcanvas-bg: #2d2d2d;
+      --offcanvas-text: #ffffff;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .navbar {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      /* background: var(--nav-bg) !important; */
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+
+    .nav-link {
+      color: var(--text-color) !important;
+      font-weight: 500;
+    }
+
+
+
+    /* Estilos para a navbar fixa */
+    #navbar-fixed {
+      position: fixed;
+      top: -100px;
+      /* Começa escondida acima da tela */
+      width: 100%;
+      z-index: 999;
+      transition: top 0.4s ease, background-color 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.9) !important;
+      backdrop-filter: blur(10px);
+      display: block !important;
+    }
+
+    #navbar-fixed.show {
+      top: 0;
+      /* Aparece no topo quando tem a classe show */
+    }
+
+    /* Ajuste para tema escuro */
+    [data-theme="dark"] #navbar-fixed {
+      background-color: rgba(45, 45, 45, 0.95) !important;
+    }
+
+ 
+    [data-theme="light"] #navbar-fixed .nav-link {
+      color: #ffffff !important;
+    }
+
+/* Efeito de linha inferior nos links - Versão Completa */
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0;
+  margin: 0 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.nav-link::before,
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link::before {
+  opacity: 0.3;
+  height: 1px;
+  bottom: -3px;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Efeito específico para navbar fixa */
+#navbar-fixed .nav-link::after {
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+
+/* Efeito específico para navbar original */
+.navbar:not(#navbar-fixed) .nav-link::after {
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+
+/* Ajustes de cores para tema claro/escuro */
+#navbar-fixed .nav-link {
+  color: white !important;
+}
+
+
+/* Para offcanvas menu */
+.offcanvas .nav-link::after {
+  background-color: currentColor;
+}
+
+
+
+    .offcanvas {
+      background-color: var(--offcanvas-bg) !important;
+      color: var(--offcanvas-text) !important;
+    }
+
+    .offcanvas-title {
+      color: var(--offcanvas-text) !important;
+    }
+
+    .nav-link {
+      color: var(--offcanvas-text) !important;
+    }
+
+    .btn-close {
+      filter: invert(var(--btn-close-filter, 0)) !important;
+    }
+
+    [data-theme="dark"] .btn-close {
+      --btn-close-filter: 1;
+    }
+
+    .hero::before {
+      background: var(--hero-overlay);
+    }
+
+    .produto-card {
+      background: var(--card-bg);
+      box-shadow: var(--card-shadow);
+    }
+
+    .footer {
+      background-color: var(--footer-bg);
+      color: var(--footer-text);
+    }
+
+    #dropdownResults {
+      background: var(--dropdown-bg);
+    }
+
+    .dropdown-item {
+      color: var(--dropdown-text) !important;
+    }
+
+    .suggestion-header {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+    }
+
+    #destaquedomes {
+      background-color: rgba(194, 187, 186, 0.3);
+      border-radius: 25px;
+    }
+
+    /* Botões de controle */
+    .control-buttons {
+      position: fixed;
+      bottom: 20px;
+      /* Adicionado para garantir posição inferior */
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-control {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: var(--card-bg);
+      color: var(--text-color);
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-control:hover {
+      transform: scale(1.1);
+    }
+
+    .language-dropdown {
+      position: relative;
+    }
+
+    .language-menu {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: var(--card-shadow);
+      padding: 10px;
+      display: none;
+      min-width: 120px;
+    }
+
+    .language-menu.show {
+      display: block;
+    }
+
+    .language-option {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .language-option:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* Resto do seu CSS permanece igual */
     .hero {
       position: relative;
       min-height: 100vh;
-      /* altura total da tela */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -25,7 +284,6 @@
       text-align: center;
       color: white;
       padding: 0 20px;
-      /* garante espaçamento lateral em mobile */
     }
 
     .hero video {
@@ -38,18 +296,6 @@
       z-index: -2;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
-    }
-
-    /* Texto dentro da hero (se você tiver) */
     .hero-content {
       position: relative;
       z-index: 1;
@@ -58,16 +304,13 @@
       padding: 0 15px;
     }
 
-    /* Media Queries para telas menores */
     @media (max-width: 768px) {
       .hero {
         min-height: 70vh;
-        /* diminui altura em mobile */
       }
 
       .hero-content {
         font-size: 1rem;
-        /* ajusta tamanho do texto */
       }
     }
 
@@ -79,38 +322,6 @@
       .hero-content {
         font-size: 0.9rem;
       }
-    }
-
-    /* Imagens laterais */
-    .hero img {
-      max-width: 300%;
-      height: auto;
-    }
-
-    /* 
-    #imgesquerdo{
-        margin-right: -150px;
-    }
-
-    #imgdireito{
-        margin-left: -225px;
-    } */
-
-    /* Navbar transparente flutuando */
-    .navbar {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: transparent !important;
-      z-index: 10;
-    }
-
-    .nav-link {
-      color: rgb(0, 0, 0) !important;
-      font-weight: 500;
-      /* font-family: "Rubik Puddles", system-ui; */
-
     }
 
     .navbar-toggler-icon {
@@ -139,14 +350,13 @@
       width: 100%;
       max-height: 300px;
       overflow-y: auto;
-      background: rgba(0, 0, 0, 0.089);
-      display: none;
-      z-index: 1000;
-      margin-top: 10px;
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       border: 2px solid #e0e0e0;
       padding: 10px 0;
+      display: none;
+      z-index: 1000;
+      margin-top: 10px;
     }
 
     .dropdown-item {
@@ -155,7 +365,6 @@
       transition: all 0.2s ease;
       border-radius: 15px;
       margin: 5px 10px;
-      color: rgb(255, 255, 255);
       font-weight: bold;
     }
 
@@ -167,8 +376,6 @@
     .suggestion-header {
       padding: 12px 20px;
       font-weight: bold;
-      color: #666;
-      background-color: #f8f9fa;
       border-radius: 15px;
       margin: 5px 10px;
       font-size: 14px;
@@ -179,15 +386,8 @@
       padding: 60px 30px;
       min-height: 400px;
       border-radius: 20px;
-      background: white;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       margin-bottom: 30px;
-    }
-
-    #destaquedomes {
-      background-color: #c2bbba4d;
-      padding: 10px;
-      border-radius: 25px;
     }
 
     .destaque-img {
@@ -199,40 +399,33 @@
 
     .destaque-img.small {
       height: 390px;
-      /* tamanho grande */
     }
 
     .destaque-img.middle {
       height: 510px;
-      /* destaque principal */
     }
 
     .destaque-img.middle:hover {
       transform: scale(1.15);
-      /* box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4); */
       z-index: 2;
     }
 
     .carrossel-container {
       position: relative;
       padding: 0;
-      /* remove as bordas laterais */
       margin: 40px 0;
     }
 
     .carrossel {
       display: flex;
       overflow-x: auto;
-      /* deixa rolar livre */
       scroll-behavior: smooth;
       padding: 20px 0;
       scrollbar-width: none;
-      /* Firefox */
     }
 
     .carrossel::-webkit-scrollbar {
       display: none;
-      /* Chrome, Safari, Edge */
     }
 
     .produto-card {
@@ -241,69 +434,14 @@
       margin: 0 10px;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-      background: white;
       transition: transform 0.3s, box-shadow 0.3s;
       display: flex;
-      /* ← NOVO: Transforma o card em flex container */
       flex-direction: column;
-      /* ← NOVO: Organiza os elementos em coluna */
     }
-
-    .card-body {
-      padding: 15px;
-      display: flex;
-      /* ← NOVO: Transforma o body em flex container */
-      flex-direction: column;
-      /* ← NOVO: Organiza os elementos em coluna */
-      flex-grow: 1;
-      /* ← NOVO: Faz o body ocupar todo espaço disponível */
-    }
-
-    .card-title {
-      font-size: 1rem;
-      margin-bottom: 8px;
-      flex-shrink: 0;
-      /* ← NOVO: Impede que o título encolha */
-    }
-
-    .card-text {
-      margin-bottom: 15px;
-      flex-shrink: 0;
-      /* ← NOVO: Impede que o preço encolha */
-    }
-
-    .d-grid {
-      margin-top: auto;
-      /* ← NOVO: Empurra o botão para baixo */
-      flex-shrink: 0;
-      /* ← NOVO: Impede que o botão encolha */
-    }
-
 
     .produto-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-    }
-
-    .produto-img {
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #f8f9fa;
-      overflow: hidden;
-    }
-
-    .produto-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .produto-card:hover .produto-img img {
-      transform: scale(1.05);
     }
 
     .produto-img {
@@ -313,6 +451,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .produto-img img {
@@ -326,6 +465,29 @@
       transform: scale(1.05);
     }
 
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .card-text {
+      margin-bottom: 15px;
+      flex-shrink: 0;
+    }
+
+    .d-grid {
+      margin-top: auto;
+      flex-shrink: 0;
+    }
+
     .btn-navegacao {
       position: absolute;
       top: 50%;
@@ -333,7 +495,6 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: white;
       border: none;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -342,10 +503,12 @@
       justify-content: center;
       font-size: 1.2rem;
       transition: all 0.3s;
+      background: var(--card-bg);
+      color: var(--text-color);
     }
 
     .btn-navegacao:hover {
-      background: #f8f9fa;
+      background: var(--card-bg);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
@@ -374,7 +537,7 @@
     }
 
     .indicador.ativo {
-      background: blue;
+      background: #007bff;
     }
 
     .carrossel-titulo {
@@ -382,16 +545,13 @@
       font-weight: 600;
       margin-bottom: 20px;
       padding-left: 15px;
-      border-left: 4px solid blue;
+      border-left: 4px solid #007bff;
     }
 
     .botaocomprar {
       padding: 10px 10px;
-      /* controla altura e largura via espaçamento interno */
       font-size: 20px;
-      /* aumenta o texto */
       border-radius: 12px;
-      /* opcional: deixa mais arredondado */
     }
 
     @keyframes flutuar {
@@ -403,16 +563,13 @@
 
       50% {
         transform: translateY(-15px);
-        /* sobe um pouco */
       }
     }
 
-    /* Aplica o efeito continuamente */
     .flutuar {
       animation: flutuar 3s ease-in-out infinite;
     }
 
-    /* Scrollbar personalizada */
     #dropdownResults::-webkit-scrollbar {
       width: 8px;
     }
@@ -432,7 +589,6 @@
       background: #aaa;
     }
 
-    /* Estilo para highlight do produto */
     .produto-card.highlight {
       animation: highlight 2s ease;
       box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
@@ -452,20 +608,48 @@
       }
     }
 
-    /* Media Query: telas pequenas */
-    @media (max-width: 667px) {}
+    @media (max-width: 667px) {
+      .control-buttons {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .btn-control {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+    }
+
+    
   </style>
 </head>
 
 <body>
+  <!-- Botões de controle -->
+  <div class="control-buttons">
+    <button class="btn-control" id="themeToggle" title="Alternar tema">
+      <i class='bx bx-moon'></i>
+    </button>
+    <div class="language-dropdown">
+      <button class="btn-control" id="languageToggle" title="Idioma">
+        <i class='bx bx-globe'></i>
+      </button>
+      <div class="language-menu" id="languageMenu">
+        <div class="language-option" data-lang="pt">Português</div>
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="es">Español</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar bg-transparent position-absolute w-100" id="home">
     <div class="container-fluid d-flex align-items-center">
-      <!-- Brand -->
       <a class="navbar-brand" href="#">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <svg width="50" height="50" fill="#ffffff" viewBox="0 0 24 24" transform="" id="injected-svg">
+          <svg width="50" height="50" fill="#ffffff" viewBox="0 0 24 24">
             <path d="M4 5H20V7H4z" />
             <path d="M4 11H20V13H4z" />
             <path d="M4 17H20V19H4z" />
@@ -473,7 +657,6 @@
         </button>
       </a>
 
-      <!-- Pesquisa alinhada à direita -->
       <div class="containerpesquisa ms-auto">
         <input type="text" name="text" class="input" id="searchInput" required="" placeholder="Type to search...">
         <div id="dropdownResults"></div>
@@ -488,26 +671,52 @@
         </div>
       </div>
 
-      <!-- Offcanvas -->
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel" data-i18n="menu">Menu</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <hr>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+              <a class="nav-link active" aria-current="page" href="#home" data-i18n="home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#produtosemdestaque">Produtos Em Destaque</a>
+              <a class="nav-link active" aria-current="page" href="#produtosemdestaque"
+                data-i18n="featuredProducts">Produtos Em Destaque</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#destaquedomes">Destaque do Mês</a>
+              <a class="nav-link active" aria-current="page" href="#destaquedomes" data-i18n="monthlyHighlight">Destaque
+                do Mês</a>
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Navbar Fixa (aparece após a hero section) -->
+  <nav id="navbar-fixed" class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <span style="font-family: 'Rubik Puddles', cursive;">HooperZone</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFixedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarFixedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-i18n="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#produtosemdestaque" data-i18n="featuredProducts">Produtos Em Destaque</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#destaquedomes" data-i18n="monthlyHighlight">Destaque do Mês</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -521,64 +730,101 @@
 
   <br><br>
   <blockquote class="blockquote text-center">
-    <p class="mb-0" style="display:grid;"></p>Querendo algumas peças pra jogar no <mark>DRIP?</mark> Você ta no lugar
-    certo!</p>
+    <p class="mb-0" data-i18n="welcomeMessage">Querendo algumas peças pra jogar no <mark>DRIP?</mark> Você ta no lugar
+      certo!</p>
   </blockquote>
 
   <!-- Carrossel de Produtos 1 -->
   <div class="container-fluid my-5" id="produtosemdestaque">
-    <h2 class="carrossel-titulo">Melhores Tênis Custo-benefício</h2>
-
+    <h2 class="carrossel-titulo" data-i18n="bestValueShoes">Melhores Tênis Custo-benefício</h2>
     <div class="carrossel-container carrossel1-container">
       <button class="btn-navegacao btn-prev carrossel1-prev">
-        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
         </svg>
       </button>
-
       <div class="carrossel-container" id="carrossel1">
         <div class="carrossel carrossel1"></div>
       </div>
-
       <button class="btn-navegacao btn-next carrossel1-next">
-        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
         </svg>
       </button>
     </div>
-
     <div class="indicadores indicadores1"></div>
   </div>
   <br>
 
   <!-- Carrossel de Produtos 2 -->
   <div class="container-fluid my-5" id="produtosemdestaque2">
-    <h2 class="carrossel-titulo">Melhores Camisetas</h2>
-
+    <h2 class="carrossel-titulo" data-i18n="bestTshirts">Melhores Camisetas</h2>
     <div class="carrossel-container carrossel2-container">
       <button class="btn-navegacao btn-prev carrossel2-prev">
-        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
         </svg>
       </button>
-
       <div class="carrossel-container" id="carrossel2">
         <div class="carrossel carrossel2"></div>
       </div>
-
       <button class="btn-navegacao btn-next carrossel2-next">
-        <svg width="24" height="24" fill="black" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
         </svg>
       </button>
     </div>
-
     <div class="indicadores indicadores2"></div>
   </div>
   <br>
 
+  <!-- Carrossel de Produtos 4 -->
+  <div class="container-fluid my-5" id="produtosemdestaque3">
+    <h2 class="carrossel-titulo" data-i18n="featuredAccessories">Shorts e Calças</h2>
+    <div class="carrossel-container carrossel3-container">
+      <button class="btn-navegacao btn-prev carrossel3-prev">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
+        </svg>
+      </button>
+      <div class="carrossel-container" id="carrossel3">
+        <div class="carrossel carrossel3"></div>
+      </div>
+      <button class="btn-navegacao btn-next carrossel3-next">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
+        </svg>
+      </button>
+    </div>
+    <div class="indicadores indicadores3"></div>
+  </div>
+  <br>
+
+  <!-- Carrossel de Produtos 4 -->
+  <div class="container-fluid my-5" id="produtosemdestaque4">
+    <h2 class="carrossel-titulo" data-i18n="shortsPants">Acessórios em Destaque</h2>
+    <div class="carrossel-container carrossel4-container">
+      <button class="btn-navegacao btn-prev carrossel4-prev">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M11.79 6.29 6.09 12l5.7 5.71 1.42-1.42L9.91 13H18v-2H9.91l3.3-3.29z" />
+        </svg>
+      </button>
+      <div class="carrossel-container" id="carrossel4">
+        <div class="carrossel carrossel4"></div>
+      </div>
+      <button class="btn-navegacao btn-next carrossel4-next">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6 13h8.09l-3.3 3.29 1.42 1.42 5.7-5.71-5.7-5.71-1.42 1.42 3.3 3.29H6z" />
+        </svg>
+      </button>
+    </div>
+    <div class="indicadores indicadores4"></div>
+  </div>
+  <br>
+
+
   <section id="destaquedomes" class="container text-center my-5 h-40">
-    <h1 id="destaque" style="font-family: Cascadia Code;" class="mb-5">Destaque do Mês</h1>
+    <h1 id="destaque" style="font-family: Cascadia Code;" class="mb-5" data-i18n="monthlyHighlight">Destaque do Mês</h1>
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-md-3 mb-3">
         <img src="img/JA3.png" class="img-fluid destaque-img small" alt="...">
@@ -600,34 +846,30 @@
     <div class="container">
       <div class="row">
         <div class="col-sm">
-          <h1 style="font-size: 25px; color: rgb(0, 0, 0);">FAQ</h1>
+          <h1 style="font-size: 25px;" data-i18n="faq">FAQ</h1>
           <br>
-          <p><a href="faq.html">FAQ</a></p>
-          <p2><a href="pp.html">Privacy Policy</a></p2>
+          <p><a href="faq.html" data-i18n="faqLink">FAQ</a></p>
+          <p><a href="pp.html" data-i18n="privacyPolicy">Privacy Policy</a></p>
           <br>
           <br>
           <br>
           <br>
         </div>
         <div class="col-sm">
-          <h1 style="font-size: 25px">Newsletter</h1>
-          <p style="font-size: 20px">Inscreva-se para receber atualizações,<br> acesso a ofertas exclusivas e muito
-            mais.</p>
-
-          <!-- Campo de entrada para email -->
+          <h1 style="font-size: 25px" data-i18n="newsletter">Newsletter</h1>
+          <p style="font-size: 20px" data-i18n="newsletterDesc">Inscreva-se para receber atualizações, acesso a ofertas
+            exclusivas e muito mais.</p>
           <input type="email" id="email" class="form-control" placeholder="Seu email" aria-label="Email" required>
           <br>
-
-          <!-- Botão para se inscrever -->
-          <!-- <button type="button" onclick="cadastrarNewsletter()">Inscrever-se</button> -->
-          <button type="button" class="btn btn-dark" onclick="cadastrarNewsletter()">Inscrever-se</button>
+          <button type="button" class="btn btn-dark" onclick="cadastrarNewsletter()"
+            data-i18n="subscribe">Inscrever-se</button>
           <br>
           <br>
           <br>
           <br>
         </div>
         <div class="col-sm">
-          <h1>Follow</h1>
+          <h1 data-i18n="follow">Follow</h1>
           <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 45px;"></i></a>
         </div>
       </div>
@@ -639,7 +881,7 @@
       <div class="row">
         <div class="col-sm">
           <h1 style="font-size: 20px; text-decoration: underline;">© HooperZone</h1>
-          <p>Powered by <a href="https://github.com/BssEric" target="_blank" rel"noopernoreferrer"
+          <p>Powered by <a href="https://github.com/BssEric" target="_blank" rel="noopener noreferrer"
               style="text-decoration: underline;">BssEric</a></p>
         </div>
       </div>
@@ -660,6 +902,150 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
+    // Sistema de tradução
+    const translations = {
+      pt: {
+        // Navbar
+        "menu": "Menu",
+        "home": "Home",
+        "featuredProducts": "Produtos Em Destaque",
+        "monthlyHighlight": "Destaque do Mês",
+
+        // Hero
+        "welcomeMessage": "Querendo algumas peças pra jogar no <mark>DRIP?</mark> Você ta no lugar certo!",
+
+        // Carrosseis
+        "bestValueShoes": "Melhores Tênis Custo-benefício",
+        "bestTshirts": "Melhores Camisetas",
+        "featuredAccessories": "Acessórios em Destaque",
+        "shortsPants": "Shorts e Calças",
+
+        // Footer
+        "faq": "FAQ",
+        "faqLink": "FAQ",
+        "privacyPolicy": "Política de Privacidade",
+        "newsletter": "Newsletter",
+        "newsletterDesc": "Inscreva-se para receber atualizações, acesso a ofertas exclusivas e muito mais.",
+        "subscribe": "Inscrever-se",
+        "follow": "Seguir",
+
+        // Search
+        "searchPlaceholder": "Digite para pesquisar...",
+        "availableProducts": "⛹️ Produtos disponíveis:",
+        "noProducts": "❌ Nenhum produto encontrado"
+      },
+      en: {
+        "menu": "Menu",
+        "home": "Home",
+        "featuredProducts": "Featured Products",
+        "monthlyHighlight": "Monthly Highlight",
+        "welcomeMessage": "Looking for some gear to play in <mark>DRIP?</mark> You're in the right place!",
+        "bestValueShoes": "Best Value Shoes",
+        "bestTshirts": "Best T-shirts",
+        "featuredAccessories": "Featured Accessories",
+        "shortsPants": "Shorts and Pants",
+        "faq": "FAQ",
+        "faqLink": "FAQ",
+        "privacyPolicy": "Privacy Policy",
+        "newsletter": "Newsletter",
+        "newsletterDesc": "Subscribe to receive updates, access to exclusive offers and much more.",
+        "subscribe": "Subscribe",
+        "follow": "Follow",
+        "searchPlaceholder": "Type to search...",
+        "availableProducts": "⛹️ Available products:",
+        "noProducts": "❌ No products found"
+      },
+      es: {
+        "menu": "Menú",
+        "home": "Inicio",
+        "featuredProducts": "Productos Destacados",
+        "monthlyHighlight": "Destacado del Mes",
+        "welcomeMessage": "¿Buscas algo de equipo para jugar con <mark>DRIP?</mark> ¡Estás en el lugar correcto!",
+        "bestValueShoes": "Mejores Zapatos Relación Calidad-Precio",
+        "bestTshirts": "Mejores Camisetas",
+        "featuredAccessories": "Accesorios Destacados",
+        "shortsPants": "Shorts y Pantalones",
+        "faq": "Preguntas Frecuentes",
+        "faqLink": "Preguntas Frecuentes",
+        "privacyPolicy": "Política de Privacidad",
+        "newsletter": "Boletín",
+        "newsletterDesc": "Suscríbete para recibir actualizaciones, acceso a ofertas exclusivas y mucho más.",
+        "subscribe": "Suscribirse",
+        "follow": "Seguir",
+        "searchPlaceholder": "Escribe para buscar...",
+        "availableProducts": "⛹️ Productos disponibles:",
+        "noProducts": "❌ No se encontraron productos"
+      }
+    };
+
+    // Sistema de tema
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    let currentLanguage = localStorage.getItem('language') || 'pt';
+
+    // Inicializar tema e idioma
+    function initializeApp() {
+      setTheme(currentTheme);
+      setLanguage(currentLanguage);
+      initializeCarrousels();
+    }
+
+    // Sistema de tema
+    function setTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
+
+      const themeIcon = document.querySelector('#themeToggle i');
+      if (theme === 'dark') {
+        themeIcon.className = 'bx bx-sun';
+        themeIcon.parentElement.title = 'Modo claro';
+      } else {
+        themeIcon.className = 'bx bx-moon';
+        themeIcon.parentElement.title = 'Modo escuro';
+      }
+    }
+
+    // Sistema de idioma
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.setItem('language', lang);
+
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          if (element.tagName === 'INPUT' && element.type === 'text') {
+            element.placeholder = translations[lang][key];
+          } else {
+            element.innerHTML = translations[lang][key];
+          }
+        }
+      });
+    }
+
+    // Event listeners
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    });
+
+    document.getElementById('languageToggle').addEventListener('click', () => {
+      document.getElementById('languageMenu').classList.toggle('show');
+    });
+
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const lang = option.getAttribute('data-lang');
+        setLanguage(lang);
+        document.getElementById('languageMenu').classList.remove('show');
+      });
+    });
+
+    // Fechar menu de idioma ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.language-dropdown')) {
+        document.getElementById('languageMenu').classList.remove('show');
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
       // Dados dos produtos
       const produtos = [
@@ -672,13 +1058,31 @@
       ];
 
       const produtos2 = [
-        { id: 7, sectionId: "CamisetaMichaelJordan", nome: "Camiseta Michael Jordan", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.e9lCcVcYAVkMJQ8dCQIkAwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 7, sectionId: "CamisetaMichaelJordan", nome: "Camiseta Michael Jordan", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.e9lCcVcYAVkMJQ8dCQIkAwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 8, sectionId: "CamisetaDennisRodman", nome: "Camiseta Dennis Rodman", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.yVaR7eh-q-Ki8iReV6TIzQHaHY?w=173&h=172&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
         { id: 9, sectionId: "CamisetaJamesHarden", nome: "Camiseta James Harden", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.ls0Av4u0BJ-WMu8IdksKlQHaJ4?w=173&h=231&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
-        { id: 10, sectionId: "CamsisetaJaMorant", nome: "Camsiseta JaMorant", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.zJhi-3ZWPsnFnhbJdjoyjQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 10, sectionId: "CamsisetaJaMorant", nome: "Camsiseta JaMorant", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.zJhi-3ZWPsnFnhbJdjoyjQHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 11, sectionId: "CamsisetaGiannisAntetokounmpo", nome: "Camiseta Giannis Antetokounmpo", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.rRxqGQqwH7E6gOyd17Q5FQHaHa?w=207&h=207&c=7&r=0&o=7&pid=1.7&rm=3" },
-        { id: 12, sectionId: "CamisetaLebronJames", nome: "Camiseta Lebron James", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.Iloeq_eAeDWFNkHlawggmwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 12, sectionId: "CamisetaLebronJames", nome: "Camiseta Lebron James", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.Iloeq_eAeDWFNkHlawggmwHaHa?w=173&h=173&c=7&r=0&o=5&dpr=2&pid=1.7" },
       ];
+
+      const produtos3 = [
+        { id: 19, sectionId: "ShortMichaelJordan", nome: "Short Michael Jordan", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.ZZixQVAzNE1zYT6191BXIAHaHa?w=173&h=173&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 20, sectionId: "ShortLebronJames", nome: "Short Lebron James", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.9wdbqnI73JzP9biM1WizvwHaHa?w=217&h=217&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 21, sectionId: "ShortVince", nome: "Short Vince Carter", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.sofPdaDGcuaCac9dQaf4CgHaGQ?w=203&h=172&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 22, sectionId: "ShortGiannis", nome: "Short Giannis Antetokounmpo", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.si3WIu82uIluFTXQ00h2RwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 23, sectionId: "ShortMemphis", nome: "Short Memphis Grizzlies", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.BQWWT8XcbSsyQlP4rUF-PAHaHa?w=203&h=203&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 24, sectionId: "ShortCurry", nome: "Short Stephen Curry", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.rfqQ0Mxx3lmGYw3CRKlOkwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
+      ];
+
+      const produtos4 = [
+        { id: 13, sectionId: "BolaBasquete", nome: "Bola de Basquete", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.IcsFLcHCAb8mcYAQHp42wAHaHa?w=206&h=206&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 14, sectionId: "MeiaoEsportivo", nome: "Meião Esportivo", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.aD3iwYZFPldAUmTXAMxxMQHaHa?w=184&h=184&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 15, sectionId: "MangaEsportiva", nome: "Manga Esportiva", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.MEq2UEu883oD5irtFbdsEgHaHa?w=206&h=206&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 16, sectionId: "HeadBand", nome: "HeadBand", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP._wRvHXob0R8vTDPik1sr0wHaFa?w=206&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" },
+      ];
+
+
 
       // Mapeamento dos itens de busca
       const searchData = [
@@ -693,7 +1097,17 @@
         { name: "Camiseta James Harden", sectionId: "CamisetaJamesHarden" },
         { name: "Camsiseta JaMorant", sectionId: "CamsisetaJaMorant" },
         { name: "Camiseta Giannis Antetokounmpo", sectionId: "CamsisetaGiannisAntetokounmpo" },
-        { name: "Camiseta Lebron James", sectionId: "CamisetaLebronJames" }
+        { name: "Camiseta Lebron James", sectionId: "CamisetaLebronJames" },
+        { name: "Short Michael Jordan", sectionId: "ShortMichaelJordan" },
+        { name: "Short Lebron James", sectionId: "ShortLebronJames" },
+        { name: "Short Vince Carter", sectionId: "ShortVince" },
+        { name: "Short Giannis", sectionId: "ShortGiannis" },
+        { name: "Short Memphis Grizzlies", sectionId: "ShortMemphis" },
+        { name: "Short Curry", sectionId: "ShortCurry" },
+        { name: "Bola de Basquete", sectionId: "BolaBasquete" },
+        { name: "Meião Esportivo", sectionId: "MeiaoEsportivo" },
+        { name: "Manga Esportiva", sectionId: "MangaEsportiva" },
+        { name: "HeadBand", sectionId: "HeadBand" }
       ];
 
       const searchInput = document.getElementById('searchInput');
@@ -702,6 +1116,8 @@
       // Inicializar carrosseis
       initCarrossel('carrossel1', produtos, 'indicadores1', 'carrossel1-prev', 'carrossel1-next');
       initCarrossel('carrossel2', produtos2, 'indicadores2', 'carrossel2-prev', 'carrossel2-next');
+      initCarrossel('carrossel3', produtos3, 'indicadores3', 'carrossel3-prev', 'carrossel3-next');
+      initCarrossel('carrossel4', produtos4, 'indicadores4', 'carrossel4-prev', 'carrossel4-next');
 
       function initCarrossel(carrosselId, produtosData, indicadoresId, prevBtnId, nextBtnId) {
         const carrossel = document.querySelector(`#${carrosselId} .carrossel`);
@@ -725,7 +1141,7 @@
                 <h5 class="card-title">${produto.nome}</h5>
                 <p class="card-text text-primary fw-bold">${produto.preco}</p>
                 <div class="d-grid">
-                    <button class="btn btn-outline-primary fixep-bottom botaocomprar">Ver Cupom</button>
+                    <button class="btn btn-outline-primary botaocomprar">Ver Cupom</button>
                 </div>
             </div>
           `;
@@ -807,10 +1223,12 @@
       function scrollToProduct(sectionId) {
         dropdownResults.style.display = 'none';
 
-        // Procurar em ambos os carrosséis
+        // Procurar em todos os carrosséis
         const carrosseis = [
           document.querySelector('#carrossel1 .carrossel'),
-          document.querySelector('#carrossel2 .carrossel')
+          document.querySelector('#carrossel2 .carrossel'),
+          document.querySelector('#carrossel3 .carrossel'),
+          document.querySelector('#carrossel4 .carrossel')
         ];
 
         let targetCard = null;
@@ -948,6 +1366,50 @@
       alert("Obrigado por se inscrever! Você receberá atualizações em: " + email);
       document.getElementById("email").value = "";
     }
+  </script>
+
+  <script>
+    document.querySelectorAll('.offcanvas .nav-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault(); // evita o salto automático
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        // Fecha o offcanvas
+        const offcanvasEl = document.getElementById('offcanvasNavbar');
+        const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+        bsOffcanvas.hide();
+
+        // Rola suavemente após o fechamento
+        setTimeout(() => {
+          const navHeight = document.querySelector('.navbar').offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }, 300);
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const hero = document.querySelector('.hero');
+      const navbarFixed = document.getElementById('navbar-fixed');
+
+      // Adiciona um pequeno offset para melhor experiência
+      const offset = 50;
+
+      window.addEventListener('scroll', () => {
+        // Verifica se o scroll passou da hero section
+        if (window.scrollY > hero.offsetHeight - offset) {
+          navbarFixed.classList.remove('d-none');
+          navbarFixed.classList.add('show');
+        } else {
+          navbarFixed.classList.add('d-none');
+          navbarFixed.classList.remove('show');
+        }
+      });
+    });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
