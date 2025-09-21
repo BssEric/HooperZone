@@ -89,68 +89,68 @@
       background-color: rgba(45, 45, 45, 0.95) !important;
     }
 
- 
+
     [data-theme="light"] #navbar-fixed .nav-link {
       color: #ffffff !important;
     }
 
-/* Efeito de linha inferior nos links - Versão Completa */
-.nav-link {
-  position: relative;
-  padding: 0.5rem 0;
-  margin: 0 1rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
+    /* Efeito de linha inferior nos links - Versão Completa */
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0;
+      margin: 0 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
 
-.nav-link::before,
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: currentColor;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
+    .nav-link::before,
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: currentColor;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
 
-.nav-link::before {
-  opacity: 0.3;
-  height: 1px;
-  bottom: -3px;
-}
+    .nav-link::before {
+      opacity: 0.3;
+      height: 1px;
+      bottom: -3px;
+    }
 
-.nav-link:hover::before,
-.nav-link:hover::after {
-  width: 100%;
-}
+    .nav-link:hover::before,
+    .nav-link:hover::after {
+      width: 100%;
+    }
 
-.nav-link:hover {
-  transform: translateY(-2px);
-}
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
 
-/* Efeito específico para navbar fixa */
-#navbar-fixed .nav-link::after {
-  background: linear-gradient(90deg, transparent, currentColor, transparent);
-}
+    /* Efeito específico para navbar fixa */
+    #navbar-fixed .nav-link::after {
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
 
-/* Efeito específico para navbar original */
-.navbar:not(#navbar-fixed) .nav-link::after {
-  background: linear-gradient(90deg, transparent, currentColor, transparent);
-}
+    /* Efeito específico para navbar original */
+    .navbar:not(#navbar-fixed) .nav-link::after {
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
 
-/* Ajustes de cores para tema claro/escuro */
-#navbar-fixed .nav-link {
-  color: white !important;
-}
+    /* Ajustes de cores para tema claro/escuro */
+    #navbar-fixed .nav-link {
+      color: white !important;
+    }
 
 
-/* Para offcanvas menu */
-.offcanvas .nav-link::after {
-  background-color: currentColor;
-}
+    /* Para offcanvas menu */
+    .offcanvas .nav-link::after {
+      background-color: currentColor;
+    }
 
 
 
@@ -620,8 +620,6 @@
         font-size: 0.9rem;
       }
     }
-
-    
   </style>
 </head>
 
@@ -706,20 +704,20 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarFixedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-i18n="home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#produtosemdestaque" data-i18n="featuredProducts">Produtos Em Destaque</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#destaquedomes" data-i18n="monthlyHighlight">Destaque do Mês</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <ul class="navbar-nav ms-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#home" onclick="fecharNavbar()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#produtosemdestaque" data-i18n="featuredProducts" onclick="fecharNavbar()">Produtos Em Destaque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#destaquedomes" data-i18n="monthlyHighlight" onclick="fecharNavbar()">Destaque do Mês</a>
+    </li>
+  </ul>
+</div>
+</div>
+</nav>
 
   <!-- Hero Section -->
   <section class="hero py-5" id="home">
@@ -1412,6 +1410,36 @@
     });
   </script>
 
+ <script>
+// Função para fechar o navbar collapse
+function fecharNavbar() {
+  const navbarCollapse = document.getElementById('navbarFixedContent');
+  if (navbarCollapse.classList.contains('show')) {
+    // Usando Bootstrap Collapse para fechar
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+      toggle: false
+    });
+    bsCollapse.hide();
+    
+    // Atualizar o botão toggler
+    const navbarToggler = document.querySelector('[data-bs-target="#navbarFixedContent"]');
+    if (navbarToggler) {
+      navbarToggler.setAttribute('aria-expanded', 'false');
+    }
+  }
+}
+
+// Adicionar event listeners para todos os links (abordagem alternativa)
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('#navbarFixedContent .nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      fecharNavbar();
+    });
+  });
+});
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
