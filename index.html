@@ -43,24 +43,6 @@
       --offcanvas-text: #ffffff;
     }
 
-    /* Detecção automática do tema do sistema */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme]) {
-        --bg-color: #1a1a1a;
-        --text-color: #ffffff;
-        --card-bg: #2d2d2d;
-        --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-        --nav-bg: rgba(26, 26, 26, 0.9);
-        --footer-bg: #2d2d2d;
-        --footer-text: #ffffff;
-        --dropdown-bg: rgba(45, 45, 45, 0.95);
-        --dropdown-text: #ffffff;
-        --hero-overlay: rgba(0, 0, 0, 0.7);
-        --offcanvas-bg: #2d2d2d;
-        --offcanvas-text: #ffffff;
-      }
-    }
-
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -81,7 +63,7 @@
       font-weight: 500;
     }
 
-    /* Efeito de linha inferior nos links */
+    /* Efeito de linha inferior nos links - Versão Completa */
     .nav-link {
       position: relative;
       padding: 0.5rem 0;
@@ -132,6 +114,10 @@
       color: var(--offcanvas-text) !important;
     }
 
+    .nav-link {
+      color: var(--offcanvas-text) !important;
+    }
+
     .btn-close {
       filter: invert(var(--btn-close-filter, 0)) !important;
     }
@@ -147,7 +133,6 @@
     .produto-card {
       background: var(--card-bg);
       box-shadow: var(--card-shadow);
-      position: relative;
     }
 
     .footer {
@@ -200,131 +185,41 @@
       box-shadow: var(--card-shadow);
       cursor: pointer;
       transition: all 0.3s ease;
-      position: relative;
     }
 
     .btn-control:hover {
       transform: scale(1.1);
     }
 
-    .btn-control:active {
-      transform: scale(0.95);
-    }
-
-    .btn-control:focus {
-      outline: 2px solid #007bff;
-      outline-offset: 2px;
-    }
-
-    .language-dropdown,
-    .theme-dropdown {
+    .language-dropdown {
       position: relative;
     }
 
-    .language-menu,
-    .theme-menu {
+    .language-menu {
       position: absolute;
       bottom: 100%;
       right: 0;
       background: var(--card-bg);
       border-radius: 8px;
       box-shadow: var(--card-shadow);
-      padding: 8px;
+      padding: 10px;
       display: none;
-      min-width: 140px;
-      z-index: 1002;
+      min-width: 120px;
     }
 
-    .language-menu.show,
-    .theme-menu.show {
+    .language-menu.show {
       display: block;
     }
 
-    .language-option,
-    .theme-option {
+    .language-option {
       padding: 8px 12px;
       cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 2px 0;
+      border-radius: 4px;
+      transition: background 0.3s ease;
     }
 
-    .language-option:hover,
-    .theme-option:hover {
+    .language-option:hover {
       background: rgba(0, 0, 0, 0.1);
-    }
-
-    .theme-option.active {
-      background: rgba(0, 123, 255, 0.2);
-      color: #007bff;
-    }
-
-    /* Botão de favorito */
-    .favorite-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
-
-    .favorite-btn:hover {
-      background: white;
-      transform: scale(1.1);
-    }
-
-    .favorite-btn.active {
-      color: #ff4757;
-    }
-
-    .favorite-btn .bx {
-      font-size: 1.2rem;
-    }
-
-    .favorite-badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #ff4757;
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
-    /* Avatar do usuário */
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 0.8rem;
-    }
-
-    .logged-in .user-avatar {
-      border: 2px solid #28a745;
     }
 
     /* Resto do seu CSS permanece igual */
@@ -365,11 +260,6 @@
 
       .hero-content {
         font-size: 1rem;
-      }
-
-      .btn-control,
-      .nav-link {
-        min-height: 44px;
       }
     }
 
@@ -480,25 +370,11 @@
       overflow-x: auto;
       scroll-behavior: smooth;
       padding: 20px 0;
-      scrollbar-width: thin;
-      scrollbar-color: #007bff transparent;
+      scrollbar-width: none;
     }
 
     .carrossel::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .carrossel::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .carrossel::-webkit-scrollbar-thumb {
-      background: #007bff;
-      border-radius: 3px;
-    }
-
-    .carrossel::-webkit-scrollbar-thumb:hover {
-      background: #0056b3;
+      display: none;
     }
 
     .produto-card {
@@ -681,17 +557,6 @@
       }
     }
 
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
     @media (max-width: 667px) {
       .control-buttons {
         bottom: 10px;
@@ -708,28 +573,11 @@
 </head>
 
 <body>
-  <!-- Botões de controle atualizados -->
+  <!-- Botões de controle com botão de menu adicionado -->
   <div class="control-buttons">
-    <div class="theme-dropdown">
-      <button class="btn-control" id="themeToggle" title="Tema">
-        <i class='bx bx-moon'></i>
-      </button>
-      <div class="theme-menu" id="themeMenu">
-        <div class="theme-option" data-theme="light">
-          <i class='bx bx-sun'></i>
-          <span>Claro</span>
-        </div>
-        <div class="theme-option" data-theme="dark">
-          <i class='bx bx-moon'></i>
-          <span>Escuro</span>
-        </div>
-        <div class="theme-option" data-theme="auto">
-          <i class='bx bx-desktop'></i>
-          <span>Automático</span>
-        </div>
-      </div>
-    </div>
-    
+    <button class="btn-control" id="themeToggle" title="Alternar tema">
+      <i class='bx bx-moon'></i>
+    </button>
     <div class="language-dropdown">
       <button class="btn-control" id="languageToggle" title="Idioma">
         <i class='bx bx-globe'></i>
@@ -740,16 +588,7 @@
         <div class="language-option" data-lang="es">Español</div>
       </div>
     </div>
-    
-    <button class="btn-control" id="favoritesToggle" title="Favoritos">
-      <i class='bx bx-heart'></i>
-      <span class="favorite-badge" id="favoriteCount" style="display: none;">0</span>
-    </button>
-    
-    <button class="btn-control" id="loginBtn" title="Minha Conta">
-      <i class='bx bx-user'></i>
-    </button>
-    
+    <!-- Botão de menu adicionado -->
     <button class="btn-control" id="menuToggle" title="Menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
       <i class='bx bx-menu'></i>
     </button>
@@ -909,6 +748,7 @@
   </div>
   <br>
 
+
   <section id="destaquedomes" class="container text-center my-5 h-40">
     <h1 id="destaque" style="font-family: Cascadia Code;" class="mb-5" data-i18n="monthlyHighlight">Destaque do Mês</h1>
     <div class="row justify-content-center align-items-center h-100">
@@ -976,67 +816,6 @@
       <br>
   </footer>
 
-  <!-- Modais de Login e Registro -->
-  <div class="modal fade" id="loginModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Entrar na HooperZone</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="loginForm">
-            <div class="mb-3">
-              <label for="loginEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="loginEmail" required>
-            </div>
-            <div class="mb-3">
-              <label for="loginPassword" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="loginPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-          </form>
-          
-          <div class="text-center mt-3">
-            <small>Não tem conta? <a href="#" id="showRegister">Cadastrar</a></small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="registerModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Criar Conta</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="registerForm">
-            <div class="mb-3">
-              <label for="registerName" class="form-label">Nome completo</label>
-              <input type="text" class="form-control" id="registerName" required>
-            </div>
-            <div class="mb-3">
-              <label for="registerEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="registerEmail" required>
-            </div>
-            <div class="mb-3">
-              <label for="registerPassword" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="registerPassword" minlength="6" required>
-            </div>
-            <button type="submit" class="btn btn-success w-100">Criar Conta</button>
-          </form>
-          
-          <div class="text-center mt-3">
-            <small>Já tem conta? <a href="#" id="showLogin">Fazer login</a></small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -1049,239 +828,25 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
-    // ========== SISTEMA DE GERENCIAMENTO DE TEMAS ==========
-    class ThemeManager {
-      constructor() {
-        this.currentTheme = localStorage.getItem('theme') || 'auto';
-        this.init();
-      }
-
-      init() {
-        this.applyTheme(this.currentTheme);
-        this.watchSystemTheme();
-        this.setupEventListeners();
-      }
-
-      applyTheme(theme) {
-        if (theme === 'auto') {
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          theme = isDarkMode ? 'dark' : 'light';
-        }
-
-        document.documentElement.setAttribute('data-theme', theme);
-        this.updateUI(theme);
-      }
-
-      setTheme(theme) {
-        this.currentTheme = theme;
-        localStorage.setItem('theme', theme);
-        this.applyTheme(theme);
-      }
-
-      updateUI(theme) {
-        const themeIcon = document.querySelector('#themeToggle i');
-        const themeOptions = document.querySelectorAll('.theme-option');
-        
-        if (this.currentTheme === 'auto') {
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          themeIcon.className = isDarkMode ? 'bx bx-desktop' : 'bx bx-desktop';
-          themeIcon.parentElement.title = 'Tema automático';
-        } else if (theme === 'dark') {
-          themeIcon.className = 'bx bx-sun';
-          themeIcon.parentElement.title = 'Modo claro';
-        } else {
-          themeIcon.className = 'bx bx-moon';
-          themeIcon.parentElement.title = 'Modo escuro';
-        }
-
-        themeOptions.forEach(option => {
-          option.classList.remove('active');
-          if (option.getAttribute('data-theme') === this.currentTheme) {
-            option.classList.add('active');
-          }
-        });
-      }
-
-      watchSystemTheme() {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        mediaQuery.addEventListener('change', (e) => {
-          if (this.currentTheme === 'auto') {
-            this.applyTheme('auto');
-          }
-        });
-      }
-
-      setupEventListeners() {
-        document.getElementById('themeToggle').addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.getElementById('themeMenu').classList.toggle('show');
-        });
-
-        document.querySelectorAll('.theme-option').forEach(option => {
-          option.addEventListener('click', () => {
-            const theme = option.getAttribute('data-theme');
-            this.setTheme(theme);
-            document.getElementById('themeMenu').classList.remove('show');
-          });
-        });
-
-        document.addEventListener('click', () => {
-          document.getElementById('themeMenu').classList.remove('show');
-        });
-      }
-    }
-
-    // ========== SISTEMA DE FAVORITOS ==========
-    class FavoritesManager {
-      constructor() {
-        this.storageKey = 'hooperzone-favorites';
-        this.favorites = this.loadFavorites();
-        this.updateBadge();
-      }
-
-      loadFavorites() {
-        const stored = localStorage.getItem(this.storageKey);
-        return stored ? JSON.parse(stored) : [];
-      }
-
-      saveFavorites() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
-        this.updateBadge();
-      }
-
-      toggleFavorite(productId, productName, productImage) {
-        const index = this.favorites.findIndex(fav => fav.id === productId);
-        
-        if (index > -1) {
-          this.favorites.splice(index, 1);
-        } else {
-          this.favorites.push({
-            id: productId,
-            name: productName,
-            image: productImage,
-            date: new Date().toISOString()
-          });
-        }
-        
-        this.saveFavorites();
-        return index === -1;
-      }
-
-      isFavorite(productId) {
-        return this.favorites.some(fav => fav.id === productId);
-      }
-
-      updateBadge() {
-        const badge = document.getElementById('favoriteCount');
-        if (badge) {
-          badge.textContent = this.favorites.length;
-          badge.style.display = this.favorites.length > 0 ? 'flex' : 'none';
-        }
-      }
-
-      getFavorites() {
-        return this.favorites;
-      }
-    }
-
-    // ========== SISTEMA DE AUTENTICAÇÃO ==========
-    class AuthSystem {
-      constructor() {
-        this.currentUser = null;
-        this.usersKey = 'hooperzone-users';
-        this.currentUserKey = 'hooperzone-current-user';
-        this.loadCurrentUser();
-      }
-
-      loadCurrentUser() {
-        const stored = localStorage.getItem(this.currentUserKey);
-        if (stored) {
-          this.currentUser = JSON.parse(stored);
-          this.updateUI();
-        }
-      }
-
-      register(name, email, password) {
-        const users = this.getUsers();
-        
-        if (users.find(user => user.email === email)) {
-          return { success: false, message: 'Email já cadastrado!' };
-        }
-
-        const newUser = {
-          id: Date.now().toString(),
-          name,
-          email,
-          password: btoa(password),
-          createdAt: new Date().toISOString(),
-          favorites: []
-        };
-
-        users.push(newUser);
-        localStorage.setItem(this.usersKey, JSON.stringify(users));
-        this.login(email, password);
-        
-        return { success: true, message: 'Conta criada com sucesso!' };
-      }
-
-      login(email, password) {
-        const users = this.getUsers();
-        const user = users.find(u => u.email === email && u.password === btoa(password));
-        
-        if (user) {
-          this.currentUser = { ...user };
-          localStorage.setItem(this.currentUserKey, JSON.stringify(this.currentUser));
-          this.updateUI();
-          return { success: true, message: 'Login realizado!' };
-        } else {
-          return { success: false, message: 'Email ou senha incorretos!' };
-        }
-      }
-
-      logout() {
-        this.currentUser = null;
-        localStorage.removeItem(this.currentUserKey);
-        this.updateUI();
-      }
-
-      getUsers() {
-        const stored = localStorage.getItem(this.usersKey);
-        return stored ? JSON.parse(stored) : [];
-      }
-
-      updateUI() {
-        const loginBtn = document.getElementById('loginBtn');
-        
-        if (this.currentUser) {
-          loginBtn.innerHTML = `<div class="user-avatar">${this.currentUser.name.charAt(0).toUpperCase()}</div>`;
-          loginBtn.classList.add('logged-in');
-          loginBtn.title = `Olá, ${this.currentUser.name}`;
-        } else {
-          loginBtn.innerHTML = '<i class="bx bx-user"></i>';
-          loginBtn.classList.remove('logged-in');
-          loginBtn.title = 'Minha Conta';
-        }
-      }
-    }
-
-    // ========== INICIALIZAÇÃO DOS SISTEMAS ==========
-    const themeManager = new ThemeManager();
-    const favoritesManager = new FavoritesManager();
-    const authSystem = new AuthSystem();
-
-    // ========== SISTEMA DE TRADUÇÃO ==========
+    // Sistema de tradução
     const translations = {
       pt: {
+        // Navbar
         "menu": "Menu",
         "home": "Home",
         "featuredProducts": "Produtos Em Destaque",
         "monthlyHighlight": "Destaque do Mês",
+
+        // Hero
         "welcomeMessage": "Querendo algumas peças pra jogar no <mark>DRIP?</mark> Você ta no lugar certo!",
+
+        // Carrosseis
         "bestValueShoes": "Melhores Tênis Custo-benefício",
         "bestTshirts": "Melhores Camisetas",
         "featuredAccessories": "Acessórios em Destaque",
         "shortsPants": "Shorts e Calças",
+
+        // Footer
         "faq": "FAQ",
         "faqLink": "FAQ",
         "privacyPolicy": "Política de Privacidade",
@@ -1289,6 +854,8 @@
         "newsletterDesc": "Inscreva-se para receber atualizações, acesso a ofertas exclusivas e muito mais.",
         "subscribe": "Inscrever-se",
         "follow": "Seguir",
+
+        // Search
         "searchPlaceholder": "Digite para pesquisar...",
         "availableProducts": "⛹️ Produtos disponíveis:",
         "noProducts": "❌ Nenhum produto encontrado"
@@ -1337,8 +904,34 @@
       }
     };
 
+    // Sistema de tema
+    let currentTheme = localStorage.getItem('theme') || 'light';
     let currentLanguage = localStorage.getItem('language') || 'pt';
 
+    // Inicializar tema e idioma
+    function initializeApp() {
+      setTheme(currentTheme);
+      setLanguage(currentLanguage);
+      initializeCarrousels();
+    }
+
+    // Sistema de tema
+    function setTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
+
+      const themeIcon = document.querySelector('#themeToggle i');
+      if (theme === 'dark') {
+        themeIcon.className = 'bx bx-sun';
+        themeIcon.parentElement.title = 'Modo claro';
+      } else {
+        themeIcon.className = 'bx bx-moon';
+        themeIcon.parentElement.title = 'Modo escuro';
+      }
+    }
+
+    // Sistema de idioma
     function setLanguage(lang) {
       currentLanguage = lang;
       localStorage.setItem('language', lang);
@@ -1355,7 +948,11 @@
       });
     }
 
-    // ========== EVENT LISTENERS ==========
+    // Event listeners
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    });
+
     document.getElementById('languageToggle').addEventListener('click', () => {
       document.getElementById('languageMenu').classList.toggle('show');
     });
@@ -1368,123 +965,13 @@
       });
     });
 
-    document.getElementById('favoritesToggle').addEventListener('click', () => {
-      const favorites = favoritesManager.getFavorites();
-      
-      if (favorites.length === 0) {
-        showToast('Você ainda não tem produtos favoritos! ❤️');
-        return;
-      }
-      
-      const favoriteList = favorites.map(fav => 
-        `• ${fav.name}`
-      ).join('\n');
-      
-      alert(`Seus produtos favoritos:\n\n${favoriteList}`);
-    });
-
-    document.getElementById('loginBtn').addEventListener('click', () => {
-      if (authSystem.currentUser) {
-        showUserMenu();
-      } else {
-        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
-      }
-    });
-
-    // Alternar entre login e registro
-    document.getElementById('showRegister').addEventListener('click', (e) => {
-      e.preventDefault();
-      const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-      const registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
-      loginModal.hide();
-      registerModal.show();
-    });
-
-    document.getElementById('showLogin').addEventListener('click', (e) => {
-      e.preventDefault();
-      const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-      const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-      registerModal.hide();
-      loginModal.show();
-    });
-
-    // Formulário de login
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-      
-      const result = authSystem.login(email, password);
-      
-      if (result.success) {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-        modal.hide();
-        showToast('Login realizado com sucesso! 🎉');
-      } else {
-        alert(result.message);
-      }
-    });
-
-    // Formulário de registro
-    document.getElementById('registerForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('registerName').value;
-      const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-      
-      const result = authSystem.register(name, email, password);
-      
-      if (result.success) {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-        modal.hide();
-        showToast('Conta criada com sucesso! Bem-vindo! 🎉');
-      } else {
-        alert(result.message);
-      }
-    });
-
-    // Fechar menus ao clicar fora
+    // Fechar menu de idioma ao clicar fora
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.language-dropdown')) {
         document.getElementById('languageMenu').classList.remove('show');
       }
-      if (!e.target.closest('.theme-dropdown')) {
-        document.getElementById('themeMenu').classList.remove('show');
-      }
-      if (e.target !== searchInput && !dropdownResults.contains(e.target)) {
-        dropdownResults.style.display = 'none';
-      }
     });
 
-    // ========== FUNÇÕES AUXILIARES ==========
-    function showToast(message) {
-      const toast = document.createElement('div');
-      toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #28a745;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-      `;
-      toast.textContent = message;
-      
-      document.body.appendChild(toast);
-      
-      setTimeout(() => {
-        toast.remove();
-      }, 3000);
-    }
-
-    function showUserMenu() {
-      alert(`Bem-vindo, ${authSystem.currentUser.name}!\n\nEm breve: Menu completo do usuário!`);
-    }
-
-    // ========== SISTEMA DE PRODUTOS E CARROSSEIS ==========
     document.addEventListener('DOMContentLoaded', function () {
       // Dados dos produtos
       const produtos = [
@@ -1550,13 +1037,13 @@
       const searchInput = document.getElementById('searchInput');
       const dropdownResults = document.getElementById('dropdownResults');
 
-      // Inicializar carrosseis com favoritos
-      initCarrosselComFavoritos('carrossel1', produtos, 'indicadores1', 'carrossel1-prev', 'carrossel1-next');
-      initCarrosselComFavoritos('carrossel2', produtos2, 'indicadores2', 'carrossel2-prev', 'carrossel2-next');
-      initCarrosselComFavoritos('carrossel3', produtos3, 'indicadores3', 'carrossel3-prev', 'carrossel3-next');
-      initCarrosselComFavoritos('carrossel4', produtos4, 'indicadores4', 'carrossel4-prev', 'carrossel4-next');
+      // Inicializar carrosseis
+      initCarrossel('carrossel1', produtos, 'indicadores1', 'carrossel1-prev', 'carrossel1-next');
+      initCarrossel('carrossel2', produtos2, 'indicadores2', 'carrossel2-prev', 'carrossel2-next');
+      initCarrossel('carrossel3', produtos3, 'indicadores3', 'carrossel3-prev', 'carrossel3-next');
+      initCarrossel('carrossel4', produtos4, 'indicadores4', 'carrossel4-prev', 'carrossel4-next');
 
-      function initCarrosselComFavoritos(carrosselId, produtosData, indicadoresId, prevBtnId, nextBtnId) {
+      function initCarrossel(carrosselId, produtosData, indicadoresId, prevBtnId, nextBtnId) {
         const carrossel = document.querySelector(`#${carrosselId} .carrossel`);
         const btnPrev = document.querySelector(`.${prevBtnId}`);
         const btnNext = document.querySelector(`.${nextBtnId}`);
@@ -1564,36 +1051,12 @@
 
         let timeoutId;
 
-        // Gerar cards de produtos com botões de favorito
+        // Gerar cards de produtos
         produtosData.forEach(produto => {
           const card = document.createElement('div');
           card.className = 'produto-card';
           card.setAttribute('data-product-id', produto.id);
           card.setAttribute('data-section-id', produto.sectionId);
-          
-          // Botão de favorito
-          const favoriteBtn = document.createElement('button');
-          const isFavorite = favoritesManager.isFavorite(produto.id);
-          favoriteBtn.className = `favorite-btn ${isFavorite ? 'active' : ''}`;
-          favoriteBtn.innerHTML = `<i class="${isFavorite ? 'bx bxs-heart' : 'bx bx-heart'}"></i>`;
-          favoriteBtn.onclick = (e) => {
-            e.stopPropagation();
-            const wasAdded = favoritesManager.toggleFavorite(
-              produto.id, 
-              produto.nome, 
-              produto.imagem
-            );
-            
-            favoriteBtn.classList.toggle('active', wasAdded);
-            favoriteBtn.querySelector('i').className = wasAdded ? 'bx bxs-heart' : 'bx bx-heart';
-            
-            // Feedback visual
-            favoriteBtn.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-              favoriteBtn.style.transform = 'scale(1)';
-            }, 300);
-          };
-          
           card.innerHTML = `
             <div class="produto-img">
                 <img src="${produto.imagem}" alt="${produto.nome}">
@@ -1606,8 +1069,6 @@
                 </div>
             </div>
           `;
-          
-          card.appendChild(favoriteBtn);
           carrossel.appendChild(card);
         });
 
@@ -1682,10 +1143,11 @@
         carrossel.style.scrollBehavior = 'smooth';
       }
 
-      // Função para scroll to product
+      // 👉 FUNÇÃO CORRIGIDA PARA SCROLL TO PRODUCT
       function scrollToProduct(sectionId) {
         dropdownResults.style.display = 'none';
 
+        // Procurar em todos os carrosséis
         const carrosseis = [
           document.querySelector('#carrossel1 .carrossel'),
           document.querySelector('#carrossel2 .carrossel'),
@@ -1709,12 +1171,16 @@
         });
 
         if (targetCard && targetCarrossel) {
+          // Rolar até a seção do carrossel
           targetCarrossel.closest('.container-fluid').scrollIntoView({
             behavior: "smooth",
             block: "center"
           });
 
+          // Destacar o card
           targetCard.classList.add('highlight');
+
+          // Rolar o carrossel até o card
           const cardIndex = Array.from(targetCarrossel.children).indexOf(targetCard);
           if (cardIndex !== -1) {
             targetCarrossel.scrollLeft = cardIndex * 270;
@@ -1802,11 +1268,15 @@
         }
       });
 
-      // Inicializar tradução
-      setLanguage(currentLanguage);
+      document.addEventListener('click', function (e) {
+        if (e.target !== searchInput && !dropdownResults.contains(e.target)) {
+          dropdownResults.style.display = 'none';
+        }
+      });
     });
+  </script>
 
-    // ========== FUNÇÕES EXISTENTES ==========
+  <script>
     function cadastrarNewsletter() {
       var email = document.getElementById("email").value;
       if (email === "") {
@@ -1820,18 +1290,22 @@
       alert("Obrigado por se inscrever! Você receberá atualizações em: " + email);
       document.getElementById("email").value = "";
     }
+  </script>
 
+  <script>
     document.querySelectorAll('.offcanvas .nav-link').forEach(link => {
       link.addEventListener('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); // evita o salto automático
         const targetId = this.getAttribute('href').substring(1);
         const target = document.getElementById(targetId);
         if (!target) return;
 
+        // Fecha o offcanvas
         const offcanvasEl = document.getElementById('offcanvasNavbar');
         const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
         bsOffcanvas.hide();
 
+        // Rola suavemente após o fechamento
         setTimeout(() => {
           const navHeight = document.querySelector('.navbar').offsetHeight;
           const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
