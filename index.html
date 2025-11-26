@@ -54,7 +54,6 @@
       width: 100%;
       top: 0;
       left: 0;
-      /* background: var(--nav-bg) !important; */
       z-index: 10;
       transition: background 0.3s ease;
     }
@@ -62,36 +61,6 @@
     .nav-link {
       color: var(--text-color) !important;
       font-weight: 500;
-    }
-
-
-
-    /* Estilos para a navbar fixa */
-    #navbar-fixed {
-      position: fixed;
-      top: -100px;
-      /* Começa escondida acima da tela */
-      width: 100%;
-      z-index: 999;
-      transition: top 0.4s ease, background-color 0.3s ease;
-      background-color: rgba(0, 0, 0, 0.9) !important;
-      backdrop-filter: blur(10px);
-      display: block !important;
-    }
-
-    #navbar-fixed.show {
-      top: 0;
-      /* Aparece no topo quando tem a classe show */
-    }
-
-    /* Ajuste para tema escuro */
-    [data-theme="dark"] #navbar-fixed {
-      background-color: rgba(45, 45, 45, 0.95) !important;
-    }
-
-
-    [data-theme="light"] #navbar-fixed .nav-link {
-      color: #ffffff !important;
     }
 
     /* Efeito de linha inferior nos links - Versão Completa */
@@ -131,28 +100,10 @@
       transform: translateY(-2px);
     }
 
-    /* Efeito específico para navbar fixa */
-    #navbar-fixed .nav-link::after {
-      background: linear-gradient(90deg, transparent, currentColor, transparent);
-    }
-
-    /* Efeito específico para navbar original */
-    .navbar:not(#navbar-fixed) .nav-link::after {
-      background: linear-gradient(90deg, transparent, currentColor, transparent);
-    }
-
-    /* Ajustes de cores para tema claro/escuro */
-    #navbar-fixed .nav-link {
-      color: white !important;
-    }
-
-
     /* Para offcanvas menu */
     .offcanvas .nav-link::after {
       background-color: currentColor;
     }
-
-
 
     .offcanvas {
       background-color: var(--offcanvas-bg) !important;
@@ -215,7 +166,6 @@
     .control-buttons {
       position: fixed;
       bottom: 20px;
-      /* Adicionado para garantir posição inferior */
       right: 20px;
       z-index: 1000;
       display: flex;
@@ -271,7 +221,6 @@
     .language-option:hover {
       background: rgba(0, 0, 0, 0.1);
     }
-
 
     /* Resto do seu CSS permanece igual */
     .hero {
@@ -624,7 +573,7 @@
 </head>
 
 <body>
-  <!-- Botões de controle -->
+  <!-- Botões de controle com botão de menu adicionado -->
   <div class="control-buttons">
     <button class="btn-control" id="themeToggle" title="Alternar tema">
       <i class='bx bx-moon'></i>
@@ -639,6 +588,10 @@
         <div class="language-option" data-lang="es">Español</div>
       </div>
     </div>
+    <!-- Botão de menu adicionado -->
+    <button class="btn-control" id="menuToggle" title="Menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+      <i class='bx bx-menu'></i>
+    </button>
   </div>
 
   <!-- Navbar -->
@@ -693,31 +646,6 @@
       </div>
     </div>
   </nav>
-
-  <!-- Navbar Fixa (aparece após a hero section) -->
-  <nav id="navbar-fixed" class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <span style="font-family: 'Rubik Puddles', cursive;">HooperZone</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFixedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarFixedContent">
-  <ul class="navbar-nav ms-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="#home" onclick="fecharNavbar()">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#produtosemdestaque" data-i18n="featuredProducts" onclick="fecharNavbar()">Produtos Em Destaque</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#destaquedomes" data-i18n="monthlyHighlight" onclick="fecharNavbar()">Destaque do Mês</a>
-    </li>
-  </ul>
-</div>
-</div>
-</nav>
 
   <!-- Hero Section -->
   <section class="hero py-5" id="home">
@@ -1066,21 +994,19 @@
 
       const produtos3 = [
         { id: 19, sectionId: "ShortMichaelJordan", nome: "Short Michael Jordan", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.ZZixQVAzNE1zYT6191BXIAHaHa?w=173&h=173&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
-        { id: 20, sectionId: "ShortLebronJames", nome: "Short Lebron James", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.9wdbqnI73JzP9biM1WizvwHaHa?w=217&h=217&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 20, sectionId: "ShortLebronJames", nome: "Short Lebron James", preco: "R$ 000,00", imagem: "        https://th.bing.com/th/id/OIP.9wdbqnI73JzP9biM1WizvwHaHa?w=217&h=217&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 21, sectionId: "ShortVince", nome: "Short Vince Carter", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.sofPdaDGcuaCac9dQaf4CgHaGQ?w=203&h=172&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 22, sectionId: "ShortGiannis", nome: "Short Giannis Antetokounmpo", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.si3WIu82uIluFTXQ00h2RwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 22, sectionId: "ShortGiannis", nome: "Short Giannis Antetokounmpo", preco: "R$ 000,00", imagem: "        https://th.bing.com/th/id/OIP.si3WIu82uIluFTXQ00h2RwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
         { id: 23, sectionId: "ShortMemphis", nome: "Short Memphis Grizzlies", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.BQWWT8XcbSsyQlP4rUF-PAHaHa?w=203&h=203&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 24, sectionId: "ShortCurry", nome: "Short Stephen Curry", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.rfqQ0Mxx3lmGYw3CRKlOkwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 24, sectionId: "ShortCurry", nome: "Short Stephen Curry", preco: "R$ 000,00", imagem: "        https://th.bing.com/th/id/OIP.rfqQ0Mxx3lmGYw3CRKlOkwHaF7?w=203&h=162&c=7&r=0&o=5&dpr=2&pid=1.7" },
       ];
 
       const produtos4 = [
         { id: 13, sectionId: "BolaBasquete", nome: "Bola de Basquete", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP.IcsFLcHCAb8mcYAQHp42wAHaHa?w=206&h=206&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 14, sectionId: "MeiaoEsportivo", nome: "Meião Esportivo", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.aD3iwYZFPldAUmTXAMxxMQHaHa?w=184&h=184&c=7&r=0&o=5&dpr=2&pid=1.7" },
-        { id: 15, sectionId: "MangaEsportiva", nome: "Manga Esportiva", preco: "R$ 000,00", imagem: "	https://th.bing.com/th/id/OIP.MEq2UEu883oD5irtFbdsEgHaHa?w=206&h=206&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
+        { id: 14, sectionId: "MeiaoEsportivo", nome: "Meião Esportivo", preco: "R$ 000,00", imagem: "        https://th.bing.com/th/id/OIP.aD3iwYZFPldAUmTXAMxxMQHaHa?w=184&h=184&c=7&r=0&o=5&dpr=2&pid=1.7" },
+        { id: 15, sectionId: "MangaEsportiva", nome: "Manga Esportiva", preco: "R$ 000,00", imagem: "        https://th.bing.com/th/id/OIP.MEq2UEu883oD5irtFbdsEgHaHa?w=206&h=206&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3" },
         { id: 16, sectionId: "HeadBand", nome: "HeadBand", preco: "R$ 000,00", imagem: "https://th.bing.com/th/id/OIP._wRvHXob0R8vTDPik1sr0wHaFa?w=206&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" },
       ];
-
-
 
       // Mapeamento dos itens de busca
       const searchData = [
@@ -1389,57 +1315,6 @@
     });
   </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const hero = document.querySelector('.hero');
-      const navbarFixed = document.getElementById('navbar-fixed');
-
-      // Adiciona um pequeno offset para melhor experiência
-      const offset = 50;
-
-      window.addEventListener('scroll', () => {
-        // Verifica se o scroll passou da hero section
-        if (window.scrollY > hero.offsetHeight - offset) {
-          navbarFixed.classList.remove('d-none');
-          navbarFixed.classList.add('show');
-        } else {
-          navbarFixed.classList.add('d-none');
-          navbarFixed.classList.remove('show');
-        }
-      });
-    });
-  </script>
-
- <script>
-// Função para fechar o navbar collapse
-function fecharNavbar() {
-  const navbarCollapse = document.getElementById('navbarFixedContent');
-  if (navbarCollapse.classList.contains('show')) {
-    // Usando Bootstrap Collapse para fechar
-    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-      toggle: false
-    });
-    bsCollapse.hide();
-    
-    // Atualizar o botão toggler
-    const navbarToggler = document.querySelector('[data-bs-target="#navbarFixedContent"]');
-    if (navbarToggler) {
-      navbarToggler.setAttribute('aria-expanded', 'false');
-    }
-  }
-}
-
-// Adicionar event listeners para todos os links (abordagem alternativa)
-document.addEventListener('DOMContentLoaded', function() {
-  const navLinks = document.querySelectorAll('#navbarFixedContent .nav-link');
-  
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      fecharNavbar();
-    });
-  });
-});
-</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
